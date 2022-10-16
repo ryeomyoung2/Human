@@ -1,0 +1,413 @@
+PLSQL
+
+function : 반환값이 있는 모듈(코드의 묶음)
+
+procedure : 반환값이 없는 모듈
+
+package: 함수와 프로시저를 모아놓은 모듈
+
+
+
+PLSQL의 필요이유
+
+-join/Subquery로 해결하지 못하는 연산작업이랑
+-주기적으로 반복되는 작업를 위해 나온것이  PLSQ임
+-사용자정의 함수를 만들 필요가 있을때 쓴다.
+
+프로그래밍 언어
+-변수
+-데이터 타입
+-연산자
+-제어문
+-함수
+-객체지향특성
+ 1.캡슐화(class,접근제한자)
+ 2.상속(extend, implement)
+ 3.다형성(polymophism)
+ 4.추상화(interface)
+
+
+----------------------------------------------------------------------------------------------------------------
+PLSQL의 변수선언 
+
+변수명 데이터타입 :=초기값/표현식;
+
+변수명 테이블명.컬럼명%type := 초기값;
+
+상수명 CONSTANT :=상수값;
+
+i integer :=0;
+
+
+declare
+ a INTEGER := 2**2*3**2;
+
+a INTEGER := 2**2*3**2;
+
+vs_emp_name varchar2(80);
+
+c_code char(3);
+
+age number :=12;
+
+name employees.name%type :='John';
+
+pi constant:=3.14
+
+----------------------------------------------------------------------------------------------------------------
+
+연산자
+
+배정연산자
+ :=
+ --
+산술연산자
+ +, -, *, /, **,||
+
+비교연산자
+ =, <>, != ,>, >=, <, <=, is null, is not null
+ --                               -------------------
+ between ~ and, in, exists, like
+ --------------------------------
+논리연산자
+not, and, or
+
+
+
+/*    */  <=범위주석
+--        <=한줄 주석
+----------------------------------------------------------------------------------------------------------------
+PLSQL의 함수 구조
+
+declare
+  변수선언
+begin
+  실행코드
+end;
+/
+
+
+dbms_output.put_line();   =>PLSQL 출력문
+
+
+
+
+declare
+  vi_num number;
+begin 
+  vi_num :=100;
+  dbms_output.put_line(vi_num);
+end;
+
+출력결과 ==> 100
+
+
+declare
+  vi_num number;
+begin 
+  vi_num :=-3.14;
+  dbms_output.put_line(vi_num);
+end;
+
+출력결과 ==> -3.14
+
+
+declare
+  vi_num number;
+begin 
+  vi_num :=2+5;
+  dbms_output.put_line(vi_num);
+end;
+
+출력결과 ==> 7
+
+
+set serveroutput on; 
+set timing on;
+declare
+  vi_num number;
+begin 
+  vi_num :=3+5;
+  dbms_output.put_line(vi_num);
+end;
+경과시간도 같이 출력
+
+
+
+select * from employees;
+set serveroutput on; 
+set timing on;
+declare
+  vs_emp_name varchar2(80);
+  vs_dep_name varchar2(80);
+begin 
+  select a.emp_name, b.department_name
+  into vs_emp_name, vs_dep_name
+  from employees a, departments b
+  where a.department_id=b.department_id
+  and a.employee_id=100;
+  dbms_output.put_line(vs_emp_name||'  -  '||vs_dep_name);
+end;
+
+출력 ==> steven king - 기획부
+----------------------------------------------------------------------------------------------------------------
+PLSQL 제어문
+
+
+if 비교문 then
+    실행문;
+elsif 비교문2 then
+    실행문;
+else
+    실행문;
+end if;
+
+
+
+declare
+  vn_salary employees.salary%type;
+  vn_did departments.department_id%type;
+begin
+  select salary into vn_salary
+  from employees
+  where department_id=90 and rownum=1;
+    dbms_output.put_line(vn_salary);
+    
+  if vn_salary between 1 and 3000 then
+    dbms_output.put_line('낮음');
+  elsif vn_salary between 3001 and 6000 then
+    dbms_output.put_line('중간');
+  elsif vn_salary between 6001 and 10000 then
+    dbms_output.put_line('높음');
+  else
+    dbms_output.put_line('최상위'); 
+  end if;
+  end;
+/
+
+==> 24000 최상위
+
+
+
+
+월급이 1000불인 사람 1명의 이름과 부서명
+declare
+  vs_name employees.emp_name%type;
+  vs_dep_name departments.department_name%type;
+begin 
+  select a.emp_name, b.department_name
+  into vs_name, vs_dep_name
+  from employees a, departments b
+  where a.salary=10000
+  and a.department_id=b.department_id 
+  and rownum=1;
+  dbms_output.put_line(vs_name||'  -  '||vs_dep_name);
+end;
+
+
+----------------------------------------------------------------------------------------------------------------
+
+277p
+
+case표현식  
+  when 결과1 then
+    실행문1;
+  when 결과2 then
+    실행문2;
+  else
+     실행문n;
+end case;
+
+
+ case 
+      when salary between 1 and 3000 then
+          dbms_output.put_line('낮음');
+      when salary between 3001 and 6000 then
+          dbms_output.put_line('중간');
+      when salary between 6001 and 10000 then 
+          dbms_output.put_line('높음');
+      else
+          dbms_output.put_line('최상위'); 
+    end case;
+  end;
+
+----------------------------------------------------------------------------------------------------------------
+while문
+
+while 조건 
+loop
+    실행문;
+end loop;
+
+0번 이상 실행
+
+
+declare
+ vn_x integer :=1;
+ total integer :=0;
+ begin
+ while vn_x <=100
+ loop
+  total:=total+vn_x;
+  vn_x:=vn_x+1;
+  end loop;
+  dbms_output.put_line('total='||total);
+  end;
+
+1부터 99까지의 합 구하기 total = 5050
+
+
+ declare
+   vn_x integer :=2;
+   vn_count integer :=1;
+ begin
+   while vn_count <=9
+   loop
+     dbms_output.put_line(vn_x||'*'||vn_count||'='||vn_x*vn_count);
+   vn_count:=vn_count+1;
+   end loop;
+ end;
+
+구구단 2단 출력
+
+
+----------------------------------------------------------------------------------------------------------------
+loop문
+
+loop
+   실행문;
+   exit when 조건;
+   실행문;
+end loop;
+
+1번이상 실행
+
+
+declare
+ vn_x integer :=2;
+ vn_count integer :=1;
+ begin
+ loop
+     dbms_output.put_line(vn_x||'*'||vn_count||'='||vn_x*vn_count);
+   
+     vn_count:=vn_count+1;
+       exit when vn_count>9;
+   end loop;
+ end;
+
+구구단 2단 출력
+
+----------------------------------------------------------------------------------------------------------------
+for문 281p
+
+for 인덱스변수 in [reverse] 초기값..최종값
+loop
+  실행문;
+end loop;
+
+
+ for i in 1..9
+ loop
+ dbms_output.put_line('2x'||i||'='||2*i);
+ end loop;
+
+
+ for i in reverse 10..1
+ loop
+ dbms_output.put_line('2x'||i||'='||2*i);
+ end loop;
+ 리버스
+----------------------------------------------------------------------------------------------------------------
+continue 문
+
+declare
+ vn_x integer:=2;
+begin
+ for i in 1..9
+ loop 
+ continue when i=5;
+ dbms_output.put_line(vn_x||'x'||i||'='||vn_x*i);
+end loop;
+end;
+
+2x5만 스킵한 구구단 2단
+
+----------------------------------------------------------------------------------------------------------------
+goto 289p
+----------------------------------------------------------------------------------------------------------------
+null 284p
+----------------------------------------------------------------------------------------------------------------
+function 함수
+
+create or replace function 함수명 (
+매개변수1 데이터타입,...
+,매개변수2 데이터타입)
+return (반환값의) 데이터타입
+is/as 
+  변수,상수 선언부
+begin
+  실행문
+  return 반환값;
+end;
+
+함수특징
+1. 호출해주는 SQL문이 필요하다
+
+
+
+create or replace function showLevel(sal employees.salary%type)
+return varchar2
+is
+   str varchar2(80);
+begin
+    if sal between 1 and 3000 then
+    str:='하위';
+    elsif sal between 3001 and 6000 then
+    str:='중위';
+    elsif sal between 6001 and 10000 then
+    str:='상위';
+    else 
+        str:='최상위';
+   end if;
+   return str;
+   end;
+   /
+
+
+==> Function SHOWLEVEL이(가) 컴파일되었습니다.
+
+
+select emp_name,salary,showLevel(salary) from employees;
+직원들 이름이랑 월급이 하위~최상위 인지 나타내줌
+
+create or replace function getFullName(abbr varchar2)
+return countries.country_name%type
+is
+ strFullName countries.country_name%type:='';
+ begin
+    select country_name into strFullName
+    from countries
+    where country_iso_code=abbr;
+   return strFullName;
+ end;
+ /
+
+
+select country_iso_code,getFullName(country_iso_code)from countries;
+
+
+
+
+부서코드 입력하여 사원이름과 부서명  출력
+create or replace function getDname(did varchar2)
+return departments.department_name%type
+is
+ strName departments.department_name%type:='';
+ begin
+    select department_name into strName
+    from departments
+    where department_id=did;
+   return strName;
+ end;
+ /
+select emp_name,getDname(department_id)from employees;

@@ -1,0 +1,2153 @@
+Python code실행방법
+1. IDLE에서 한문장씩 실행&확인
+2. 화일안에 코딩해서 한꺼번에 실행(실제현장작업)
+
+
+파이썬은 int i =0; 마냥 타입선언이 없다.
+>>> print("Hellow World")
+Hellow World
+>>> i=10
+>>> i
+10
+>>> print(i)
+10
+
+            | 자바 | 자바스크립트 |파이썬  |PLSQL
+---------------------------------------------------
+타입선언|  있음|    없음          | 없음    | 있음
+---------------------------------------------------
+문자열   |     "  |    ", '            | ",'        |    ' 
+---------------------------------------------------
+자바: int float stirng double char long
+자바스크립트:number string
+PLSQL : number varchar2
+배정연산자는 PLSQL만 := 나머지는 =
+배정연산자는 PLSQL만 = 나머지는 ==
+
+
+
+
+
+
+>>> type(i)       #변수 i의 데이터 타입 확인
+<class 'int'>
+
+>>> i=3.14
+>>> type(i)
+<class 'float'>
+
+
+pi=3.14
+Address="영등포구 윤중로 6"
+print(pi)
+name="임여명"
+print(name)
+print(Address)
+
+------------------------------------------------------------------------------------------------------------------
+연산자
+-산술연산자: +, -, *, /, **, %(나머지), //(몫),=,+=,-=,*=,/=,%=,//=
+                  +:양쪽이 문자열이면 연결연산자로 동작(숫자는 문자열로 변환 with str())
+                   없는 연산자: ++,--
+-비교연산자: ==,!=,>,>=,<,<=, is None, ==None, is not None, ==None, !=None
+-논리연산자:and,or,not
+-Null이 없고, 대신 None사용
+#파이썬의 키워드는 (keyword)는 소문자로만 쓴다.
+#상수:None, True, False 는 대문자로 시작
+
+print() : format(),%
+
+>>> a=10%3
+>>> a
+1
+>>> a=10//3
+>>> a
+3
+
+>>> a=10
+>>> b=5
+>>> a>6
+True
+
+ 파이썬에서는 대문자로 단어가 시작한다.
+
+
+>>> print(a)
+10
+>>> print('사과값은'+str(a)+'원입니다,');
+사과값은10원입니다,
+
+>>> print('사과값은 {}입니다. '.format(a))
+사과값은 10입니다.
+
+>>> a=10
+>>> b=5
+>>> print('사과값은 {}이고, 포도값은 {}원 입니다,'.format(a,b))
+사과값은 10이고, 포도값은 5원 입니다,
+
+>>> print('사과값은 %d이고, 포도값은 %d입니다' %(a,b))
+사과값은 10이고, 포도값은 5입니다
+
+>>> print('사과값은 [%5d]이고, 포도값은 [%5d]입니다' %(a,b))
+사과값은 [   10]이고, 포도값은 [    5]입니다
+
+>>> print('[%5s]이고,\n[%5s]입니다'%('Hello','World'))
+[Hello]이고,
+[World]입니다
+
+>>> print(f'사과값은 {a}이고, 포도값은 {b}입니다')
+사과값은 10이고, 포도값은 5입니다
+( 이걸 압도적으로 제일 많이쓴다)
+
+
+
+print("Hello World",end=' ')  
+print("Good Morning vietnam")
+=>Hello World Good Morning vietnam
+
+print("Hello World")  
+print("Good Morning vietnam")
+=>Hello World
+Good Morning vietnam
+
+print("Hello World")  
+print()
+print("Good Morning vietnam")
+=>Hello World
+
+Good Morning vietnam
+
+
+
+print("Hello World\n")  
+print("Good Morning vietnam")
+=>Hello World
+
+Good Morning vietnam
+
+
+#print("Hello World\n\n\n")  
+=>print("Good Morning vietnam")
+Good Morning vietnam
+
+
+
+"""
+print("Hello World\n\n\n")  
+"""
+print("Good Morning vietnam")
+=> Good Morning vietnam
+
+
+print(r"Hello World\n\n\n")  # raw character
+print("Good Morning vietnam")
+=>Hello World\n\n\n
+Good Morning vietnam
+
+>>> print(f'사과값은 {a}이고, 포도값은 {b}입니다')
+사과값은 10이고, 포도값은 5입니다
+
+>>> print(f'사과값은 {a}이고, 포도값은 {a*b}입니다')
+사과값은 10이고, 포도값은 50입니다
+
+
+---------------------------------------------------------------------------------------------------------------
+제어문
+
+
+중요 indentation(들여쓰기)가 필수(2,4칸 들여쓰기)
+if 조건:
+  실행문1
+  실행문2
+else:
+  실행문1
+  실행문2
+실행문
+
+
+a=10
+b=5
+if a>b:
+    print(f'{a}가 더 큽니다.')
+else:
+    print(f'{b}가 더 크거나 같습니다.')
+print('프로그램 종료')
+
+=> 10가 더 큽니다.
+프로그램 종료
+
+
+if 조건:
+  실행문1
+  실행문2
+elif 조건2:
+  실행문1
+  실행문2
+else:
+  실행문
+
+
+자바스크립트에서는
+alert()-----확인(OK)
+confirm()-----(Yes/No, OK/Cancel)
+prompt()-----문자열로 입력
+
+자바에서는
+Scanner class
+
+import java.utils.Scanner;
+
+main(){
+Scanner s = new Scanner(System.in);
+
+String line=s.nextLine();
+int n=s.nextInt();
+float f=s.nextFloat();
+
+파이썬은
+
+String input(설명/가이드)
+
+>>> name=input('이름을 입력하시오')
+이름을 입력하시오john
+>>> name
+'john'
+
+>>> name=input('이름을 입력하시오\n')
+이름을 입력하시오
+john
+>>> name
+'john'
+
+
+>>> n=input('주문할 수량을 입력하시오 ')
+주문할 수량을 입력하시오 7
+>>> n
+'7'
+>>> i=int(n)
+>>> i
+7
+>>> type(n)
+<class 'str'>
+>>> type(i)
+<class 'int'>
+
+
+
+>>> n=int(input('수량을 입력하시오.'))
+수량을 입력하시오.7
+>>> n
+7
+
+
+
+n=input('수량을 입력하시오')
+if n.isnumeric():
+    n=int(n)
+else:
+    print('숫자만 입력가능')
+
+=> 수량을 입력하시오john
+숫자만 입력가능
+
+
+
+#숫자 두개를 순서대로 읽어들여서 대소비교 결과를 출력
+
+n=input('숫자1을 입력하시오')
+if n.isnumeric():
+    n=int(n)
+else:
+    print('숫자만 입력가능')
+n2=input('숫자2을 입력하시오')
+if n2.isnumeric():
+    n2=int(n2)
+else:
+    print('숫자만 입력가능')
+if n>n2:
+    print(f'{n}가 더 큽니다.')
+elif n<n2:
+    print(f'{n2}가 더 큽니다.')
+else:
+    print('두 숫자가 같습니다.')
+print('프로그램 종료')
+
+
+else쪽에 아무것도 안 쓰고 건너뛰고 싶으면
+else:
+    pass
+이렇게 써줘야 한다.
+
+
+
+------------------------------------------------------------------------------------------------------------------
+while문
+
+while 조건:
+  실행문1
+  ...
+  실행문n
+  continue/break   (자신이 속한 가장 안쪽 반복문을 되돌아가거나 탈출함)
+
+실행문
+
+
+i=0
+while i<10:
+    j=0
+    while j<5:
+        if j>3:
+            break
+        print(f'i [{i}] j [{j}]')
+        j+=1
+    i+=1
+print('program terminated')
+
+=> 
+i [0] j [0]
+i [0] j [1]
+i [0] j [2]
+i [0] j [3]
+i [1] j [0]
+i [1] j [1]
+i [1] j [2]
+i [1] j [3]
+i [2] j [0]
+i [2] j [1]
+i [2] j [2]
+i [2] j [3]
+i [3] j [0]
+i [3] j [1]
+i [3] j [2]
+i [3] j [3]
+i [4] j [0]
+i [4] j [1]
+i [4] j [2]
+i [4] j [3]
+i [5] j [0]
+i [5] j [1]
+i [5] j [2]
+i [5] j [3]
+i [6] j [0]
+i [6] j [1]
+i [6] j [2]
+i [6] j [3]
+i [7] j [0]
+i [7] j [1]
+i [7] j [2]
+i [7] j [3]
+i [8] j [0]
+i [8] j [1]
+i [8] j [2]
+i [8] j [3]
+i [9] j [0]
+i [9] j [1]
+i [9] j [2]
+i [9] j [3]
+program terminated
+------------------------------------------------------------------------------------------------------------------
+for문
+
+for 변수 in 리스트/튜플/딕셔너리/셋:
+  실행문1
+  ....
+  실행문
+  continue/break
+실행문
+
+
+
+range(시작값,종료값,증감)
+range(종료값) =range(0,종료값+1,1)
+range(시작값,종료값) =range(시작값,종료값+1,1)
+
+
+
+
+
+
+>>> for i in range(10): #for i in range(0,10,1):
+...   print(i)
+...
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+
+
+for i in range(5): # for i in range(0,5,1):
+...   print(i)
+...
+0
+1
+2
+3
+4
+
+
+
+>>> for i in range(0,10,2):
+...   print(i)
+...
+0
+2
+4
+6
+8
+
+
+
+>>> for i in range(10,4,-1):
+...   print(i)
+...
+10
+9
+8
+7
+6
+5
+
+
+
+>>> for i in range(5):
+...   for j in range(3):
+...     print(i,j)
+...
+0 0
+0 1
+0 2
+1 0
+1 1
+1 2
+2 0
+2 1
+2 2
+3 0
+3 1
+3 2
+4 0
+4 1
+4 2
+
+
+
+>>>  #1부터 100까지 합 (for문)
+j=0
+for i in range(1,101):
+   j=j+i
+print(j)
+
+>>>  #1부터 100까지 합 (while문)
+x=0
+y=0
+while x<100:
+  x=x+1
+  y=y+x
+print(y)
+
+
+파이썬에는 switch문과 do~while문이 없다.
+
+
+
+#구구단 2단부터 9단까지 출력 (while)
+x=1
+while x<9:
+    x=x+1
+    cnt=0
+    while cnt<9:
+      cnt=cnt+1
+      print(f'{x}x{cnt}={x*cnt}')
+
+#구구단 2단부터 9단까지 출력 (for)
+for x in range(2,10):
+  for cnt in range(1,10):
+    print(f'{x}x{cnt}={x*cnt}')
+
+
+
+#피보나치 수열 10000 이하까지만 구하기
+#0 1 1 2 3 5 8 13 21 34 55 89 144 233...
+
+a=0
+b=1
+c=a+b
+if c>10000: break
+print(c)
+a=b
+b=c
+c=a+b
+.
+.
+.
+
+=>
+
+a=0
+b=1
+c=a+b
+while c<=10000:
+    print(c)
+    a=b
+    b=c
+    c=a+b
+
+#prime number 소수:1과 자기자신 이외의 숫자로는 나눠지지 않는 수
+#2 3 5 7 11 13 17 19 23 29 31 37..
+#N : 2~n-1로 나눠본다. 한번도 나머지가 0이 나오는 적이 없으면 소수임
+#반대로 말하면 한번이라도 나머지가 0이면 소수아님
+#100이하의 숫자중 소수만 출력
+
+for i in  range(0,20):
+    for j in range(2,i+1):
+        if(i==j):
+            print(i)
+        elif(i%j==0):
+            break
+    
+------------------------------------------------------------------------------------------------------------------
+a1=76
+a2=88
+a3=92
+...
+a30=100
+
+
+a=[76,88,92,95,...,100]
+자바스크립트의 array는 파이썬의 list처럼 가변임
+
+
+l=[10,9,8,7,6]
+print(l[3])
+=>7
+
+
+l[3]='hello'
+print(l)
+=> [10, 9, 8, 'hello', 6]
+
+
+l.append(100)
+print(l)
+=> [10, 9, 8, 'hello', 6, 100]
+
+
+
+
+l[3]='World'
+print(l)
+=> [10, 9, 8, 'World', 6, 100]
+
+
+l.remove('World')
+print(l)
+=>[10, 9, 8, 'hello', 6, 100]
+
+
+LIST []
+리스트명=[값1,값2,...,값n]
+.append(값): 리스트 맨 뒤에 값을 추가
+.remove(값): 맨 처음 나오는 값을 삭제
+del 리스트명[인덱스]:리스트에서 해당 인덱스 번호를 제거
+                             리스트 길이도 줄어든다.
+.index(값): '값'의 인덱스 번호를 가져온다(못찾으면 오류)
+.insert(인덱스,값): 인덱스 위치에 값을 끼워넣는다
+.pop() : 리스트 맨 마지막 데이터를 가져오고 리스트 길이는 줄어든다.
+.count(값) : 리스트 안에 같은 '값'이 몇개인지 찾는다.
+.extend(리스트명) : 리스트를 리스트 뒤에 추가/원 리스트가 연장된다.(데이터가 바뀐다)
+.sort():리스트의 값들을 오름차순으로 정렬한다.
+.reverse() : 리스트를 역순으로 바꾼다.
+len(리스트명) : 리스트의 길이 (데이터의 갯수)length
+* :리스트/문자열 반복
++ :리스트/문자열 연결, 사용된 리스트 내용은 바뀌지 않는다.
+
+슬라이싱(Slicing) :부분만 추출
+[m:n] 리스트의 인덱스 m부터 n-1위치의 데이터까지 추출
+[:n] == [0:n] 처음부터 n-1까지의 데이터 추출
+[m:] == m부터 끝까지 데이터 추출
+[:] == 리스트의 모든 데이터 추출
+
+range(시작값,종료값,증감)
+range(종료값) = range(0,종료값+1,1)
+range(시작값,종료값) = range(시작값,종료값+1,1)
+
+
+l=[3,2,1,3,2,1]
+print(l)
+l.remove(3)
+print(l)
+=> [2, 1, 3, 2, 1]
+
+
+l=[5,7,3,9,6]
+l.insert(3,-1)
+print(l)
+=> [5, 7, 3, -1, 9, 6]
+
+>>>l=[4,5,3,6]
+>>> l.index(5)
+1
+
+
+
+>>>l=[4,5,3,6]
+>>> l.pop()
+6
+
+
+>>> ar=['hello','world','good','morning','vietnam']
+>>> ar
+['hello', 'world', 'good', 'morning', 'vietnam']
+>>> ar.append(1975)
+>>> ar
+['hello', 'world', 'good', 'morning', 'vietnam', 1975]
+>>> n=ar.pop()
+>>> n
+1975
+>>> ar
+['hello', 'world', 'good', 'morning', 'vietnam']
+
+
+
+['hello', 'world', 'good']
+>>> ar.count('Good')
+0
+>>> ar.count('good')
+1
+
+
+['hello', 'world', 'good']
+>>> br=[0,1,2,3,4,5]
+>>> ar.extend(br)
+>>> ar
+['hello', 'world', 'good', 0, 1, 2, 3, 4, 5]
+
+
+
+>>> ar=[10,17,12,1,3,9,5]
+>>> ar.sort()
+>>> ar
+[1, 3, 5, 9, 10, 12, 17]
+>>>
+
+
+[1, 3, 5, 9, 10, 12, 17]
+>>> ar.reverse()
+>>> ar
+[17, 12, 10, 9, 5, 3, 1]
+>>>
+
+
+
+['Hello', 'world', 'good', 'morning']
+>>> ar.reverse()
+>>> ar
+['morning', 'good', 'world', 'Hello']
+>>>
+
+
+['morning', 'good', 'world', 'Hello']
+>>> len(ar)
+4
+
+
+>>> n="Rose"*3
+>>> n
+'RoseRoseRose'
+
+
+
+['Hello', 'world', 'good', 'morning']
+>>> ar*3
+['Hello', 'world', 'good', 'morning', 'Hello', 'world', 'good', 'morning', 'Hello', 'world', 'good', 'morning']
+
+
+
+
+>>> ar=[1,2,3,4]
+>>> br=['a','b','c','d']
+>>> ar+br
+[1, 2, 3, 4, 'a', 'b', 'c', 'd']
+>>> cr=ar+br
+>>> cr
+[1, 2, 3, 4, 'a', 'b', 'c', 'd']
+이렇게할경우엔 extend와는 달리 각각의 리스트가 그대로 남아있음
+
+
+
+[1, 2, 3, 4, 'a', 'b', 'c', 'd']
+>>> cr[3:6]
+[4, 'a', 'b']
+
+
+
+>>> br
+['a', 'b', 'c', 'd']
+>>> for i in br:
+...  print(i)
+...
+a
+b
+c
+d
+
+
+
+
+>>> l2=[i*3 for i in range(1,7)]
+>>> l2
+[3, 6, 9, 12, 15, 18]
+3의배수
+
+
+>>> l2=[i for i in range(1,101)]
+>>> l2
+[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100]
+1부터100까지
+
+
+
+>>> l2=[i for i in range(1,101,2)]
+>>> l2
+[1, 3, 5, 7, 9, 11, 13, 15, 17, 19, 21, 23, 25, 27, 29, 31, 33, 35, 37, 39, 41, 43, 45, 47, 49, 51, 53, 55, 57, 59, 61, 63, 65, 67, 69, 71, 73, 75, 77, 79, 81, 83, 85, 87, 89, 91, 93, 95, 97, 99]
+100까지숫자중홀수만
+
+
+
+[[1, 2, 3], ['a', 'b', 'c'], ['hello', 'world'], 12, 'john', [-1, -2, -3, -4]]
+>>> l2[1][2]
+'c'
+
+
+
+
+
+sort없이정렬하기
+
+첫번째방법
+ar=[100,-2,-14,25,7,3,5,109]
+for a in range(1,9):
+    b=9-a
+    for c in range(1, b):
+        if ar[c-1] > ar[c]:
+            e = ar[c-1]
+            ar[c-1]=ar[c]
+            ar[c]=e
+print(ar)
+
+=>[-14, -2, 3, 5, 7, 25, 100, 109]
+
+두번째방법
+ar=[100,-2,-14,25,7,3,5,109]
+for i in range(len(ar)):
+    for j in range(i+1,len(ar)):
+        if ar[i]>ar[j]:
+            x=ar[i]
+            ar[i]=ar[j]
+            ar[j]=x
+print(ar)
+=>[-14, -2, 3, 5, 7, 25, 100, 109]
+
+------------------------------------------------------------------------------------------------------------
+
+>>> str='Hello World'
+>>> str[:]
+'Hello World'
+>>> str[2:5]
+'llo'
+>>> str[7:12]
+'orld'
+>>> str[:4]
+'Hell'
+>>> str[4:]
+'o World'
+>>> str[-3:] 거꾸로 인덱스 (....,-4,-3,-2,-1)
+'rld'
+>>> str[-3:10]
+'rl'
+------------------------------------------------------------------------------------------------------------
+Tuple(튜플) 리스트랑 유사한데 []로 묶지않고 ()로 묶거나 안묶는다.
+
+create/read 가능, 인덱스 사용
+update/delete 불가     리스트는 네 개 전부가능
+
+
+>>> t1=(1,2,3,4,5,6)
+>>> t2=1,2,3,4,5,6
+>>> t1
+(1, 2, 3, 4, 5, 6)
+>>> t2
+(1, 2, 3, 4, 5, 6)
+>>> t2[3]
+4
+
+
+>>> n=t2[3]
+>>> t2
+>>> n
+4
+이렇게 튜플에서 데이터를 꺼내오는것만 되고 업데이트하거나 지우는거 못함
+
+
+튜플은 언제 사용하는지 => 값 바꾸기 할 때, 여러개의 함수의 반환값 사용
+   x=ar[i]
+  ar[i]=ar[j]
+    ar[j]=x
+이렇게 세줄짜리를 ar[i],ar[j]=ar[j],ar[i] 이렇게 짧게 쓸수 있다
+
+
+
+
+>>> t1=('hello',1,'world',2,'good',3,'morning')
+>>> for i in t1:
+...   print(i)
+...
+hello
+1
+world
+2
+good
+3
+morning
+
+
+
+
+>>> t1=[1,2,3,4],-12,'a',(4,5,6,7)
+>>> t1[1]
+-12
+>>> t2[2]
+3
+>>> t1[3]
+(4, 5, 6, 7)
+>>> t1[0][3]=5
+>>> t1
+([1, 2, 3, 5], -12, 'a', (4, 5, 6, 7))
+
+------------------------------------------------------------------------------------------------------------
+set(세트,집합)
+
+create/read/update/delete 가능
+값의 중복 불허
+
+셋은 중복데이터를 제거할때 주로 사용한다.
+
+
+>>> s1={1,2,3,4,2,3,1}
+>>> s1
+{1, 2, 3, 4}
+
+리스트나 튜플은 중복을 허용하지만 셋은 허용하지 않기때문에 1,2,3,4만 출력
+
+
+
+>>> s1={1,2,3,4,2,3,1}
+>>> s1
+{1, 2, 3, 4}
+>>> for i in s1:
+...   print(i)
+...
+1
+2
+3
+4
+>>> s1[0]
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: 'set' object is not subscriptable
+보다시피 for문은 이용가능하나 인덱스 사용이 불가함
+
+--------------------------------------------------------------------------------------------------------------------
+dictionary (딕셔너리,사전)   Create/read/update/delete 모두 가능 
+key: 정수, 실수, 문자열만 가능
+인덱스 사용불가, 대신 'key'사용
+
+key: value      key-value couple
+d1={'name':'john', 'birthday':'1225','mobile':'44445555','grade':'4', 'math':'96','english':'72','korean':'100'}
+
+>>> d1={'name':'jone','age':'25','math':'96','english':'72','korean':'100'}
+>>> d1
+{'name': 'jone', 'age': '25', 'math': '96', 'english': '72', 'korean': '100'}
+>>> d1['name']
+'jone'
+>>> d1['age']
+'25'
+>>> d1['math']
+'96'
+>>> n='english'
+>>> d1[n]
+'72'
+>>> d1['age']=27
+>>> d1
+{'name': 'jone', 'age': 27, 'math': '96', 'english': '72', 'korean': '100'}
+
+
+
+
+>>> d1['city']='seoul'
+>>> d1
+{'name': 'jone', 'age': 27, 'math': '96', 'english': '72', 'korean': '100', 'city': 'seoul'}
+>>>
+추가도 된다
+
+
+
+
+
+
+>>> d1['city']=None
+>>> d1
+{'name': 'jone', 'age': 27, 'math': '96', 'english': '72', 'korean': '100', 'city': None}
+>>> del d1['city']
+>>> d1
+{'name': 'jone', 'age': 27, 'math': '96', 'english': '72', 'korean': '100'}
+
+
+
+
+>>> d1
+{'name': 'jone', 'age': 27, 'math': '96', 'english': '72', 'korean': '100'}
+>>> for i in d1:
+...   print(i)
+...
+name
+age
+math
+english
+korean
+
+
+
+>>> for i in d1:
+...   print(d1[i])
+...
+jone
+27
+96
+72
+100
+
+
+>>> for i in d1:
+...   print(d1[i])
+...
+jone
+27
+96
+72
+100
+
+
+>>> for x,y in d1.items():
+...   print('key [{}] value [{}]'.format(x,y))
+...
+key [name] value [jone]
+key [age] value [27]
+key [math] value [96]
+key [english] value [72]
+key [korean] value [100]
+
+
+#학생이름(name),수학성적(math)을 입력받아서 Student라는 리스트에 추가하는 프로그램
+학생이름이 빈문자열로 들어오면 프로그램 종료.
+input()
+while str!=' ':
+while문이 실행되면 입력된 학생이름과, 수학성적을 모두 출력
+1.이름을 입력
+2.이름이 빈 문자열이 아닌동안    <-----------------------------
+   3 수학성적 입력                                                          |
+   4 이름, 수학성적 => 딕셔너리 만들고                             |
+   5 만든 딕셔너리를 student라는 리스트에 추가                  |
+   6 새 학생 이름을 입력                                         --------
+ 7. while문을 이용해서 이름, 수학성적을 모두 출력
+
+
+
+str=0
+name='이름'
+score='수학점수'
+math=0
+student=[]
+str=input('이름을 입력하시오: ')
+math=input('수학점수를 입력하시오: ')
+while str!='':
+    d1={}
+    d1[name]=str
+    d1[score]=math
+    student.append(d1)
+    print(student)
+    str=input('이름을 입력하시오: ')
+    math=input('수학점수를 입력하시오: ')
+print('프로그램 종료')
+
+
+
+
+
+정답
+student=[]
+name=input('이름 입력: ')
+while name!='':
+    math=int(input('수학점수 입력: '))
+    d1={'name':name,'math':math}
+    student.append(d1)
+    name=input('이름 입력: ')
+for dl in student:
+    print(d1['name'],d1['math'])
+
+-------------------------------------------------------------------------------------------------------------------
+화일입출력
+
+3 가지 mode: Read only,
+                   Write only 기존내용을 다 지워버리고 새로쓴다.
+                   Append 기존내용 뒤에 추가로 작성
+
+open():화일이 존재하지 않으면 새로 만들고 연다.
+         존재하면 연다
+
+f=open(화일의 위치와 이름, 'r'/'w'/'a')
+f.read()/f.readline()
+f.write()
+f.close()
+
+
+
+>>> f=open('D:\LIM\python/menu.txt','w')
+>>> f.write('John')
+4
+>>> f.close()
+>>>
+menu.txt 찾아들어가서 열어보면 John이라고써있다
+
+
+>>> f=open('D:\LIM\python/menu.txt','w')
+>>> f.write('Jane')
+4
+>>> f.write('Jason')
+5
+>>> f.write('Jacop')
+5
+>>> f.close()
+>>>
+
+
+
+
+>>> f=open('D:\LIM\python/menu.txt','w')
+>>> f.write('Jane\n')
+5
+>>> f.write('jason\n')
+6
+>>> f.write('jacob')
+5
+>>> f.close()
+>>>
+Jane
+jason
+jacob
+
+
+
+>>> f=open('D:\LIM\python/menu.txt','a')
+>>> f.write('james\n')
+6
+>>> f.write('jake')
+4
+>>> f.close()
+Jane
+jason
+jacobjames
+jake
+
+
+
+f=open('D:\LIM\python/student.txt','a')
+student=[]
+name=input('이름 입력: ')
+while name!='':
+    math=int(input('수학점수 입력: '))
+    f.write(name+','+str(math)+'\n')
+    d1={'name':name,'math':math}
+    student.append(d1)
+    name=input('이름 입력: ')
+for d1 in student:
+    print(d1['name'],d1['math'])
+f.close()
+아까 문제에 화일입출력 추가하여 폴더에 저장하는법
+
+
+
+
+f=open('D:\LIM\python/student.txt','r')
+line=f.readline()
+while line!='':
+  print('-'+line,end='')
+  line=f.readline()
+f.close()
+폴더 불러와서 읽기
+
+
+===>
+
+student=[]
+print('-'*80)
+f=open('D:\LIM\python/student.txt','r')
+line=f.readline()
+while line!='':
+  ar=line.split(',')  ## John,25 -> ['John','25']
+  d1={'name':ar[0],'math':int(ar[1])}
+  student.append(d1)
+  line=f.readline()
+f.close()
+for d1 in student:
+    print(d1['name'],d1['math'])
+
+
+------------------------------------------------------------------------------------------------------------------------------------
+
+
+def displaymenu(lmenu):
+    ndx=1
+    for d1 in munulist:
+        print('%2d %-15s %4d원'%(ndx,d1['메뉴명'],d1['가격']))
+        ndx+=1
+
+
+f=open('D:\LIM\python/menu2.txt','a')
+munulist=[]
+menuname=input('메뉴명 입력: ')
+while menuname!='':
+    price=int(input('가격 입력: '))
+    f.write(menuname+','+str(price)+'\n')
+    d1={'메뉴명':menuname,'가격':price}
+    munulist.append(d1)
+    menuname=input('메뉴명 입력: ')
+displaymenu(munulist)
+f.close()
+
+
+print('-'*80)
+munulist=[]
+f=open('D:/LIM/python/menu2.txt','r')
+line=f.readline()
+while line!='':
+  ar=line.split(',') 
+  d1={'메뉴명':ar[0],'가격':int(ar[1])}
+  munulist.append(d1)
+  line=f.readline()
+f.close()
+displaymenu(munulist)
+
+
+
+---------------------------------------------------------------------------------------------------------------
+함수
+-반복되는 코드를 한 곳에 모아서 호출만으로 반복실행하기 위해서 사용
+코드의 맨 첫부분에 위치해야한다.
+
+
+function 함수명(매개변수1,...,매개변수n){
+  실행문
+}
+=>자바스크립트
+
+
+datatype 함수명(datatype매개변수1,...,datatype매개변수n){
+  실행문
+}
+void 함수명(datatype매개변수1,...,datatype매개변수n){
+  실행문
+}
+=>자바
+
+
+def 함수명(매개변수1,...,매개변수n):
+  실행문
+
+def 함수명(매개변수1,...,매개변수n):
+  실행문
+  return 반환값
+
+def 함수명(매개변수1,...,매개변수n):
+  실행문
+  if 조건:
+    return
+=>파이썬
+
+
+def printData():
+    ndx=1
+    for d1 in munulist:
+        print('%2d %-15s %4d원'%(ndx,d1['메뉴명'],d1['가격']))
+        ndx+=1
+
+f=open('D:\LIM\python/menu2.txt','a')
+munulist=[]
+menuname=input('메뉴명 입력: ')
+while menuname!='':
+    price=int(input('가격 입력: '))
+    f.write(menuname+','+str(price)+'\n')
+    d1={'메뉴명':menuname,'가격':price}
+    munulist.append(d1)
+    menuname=input('메뉴명 입력: ')
+printData()
+f.close()
+
+print('-'*80)
+munulist=[]
+f=open('D:/LIM/python/menu2.txt','r')
+line=f.readline()
+while line!='':
+  ar=line.split(',') 
+  d1={'메뉴명':ar[0],'가격':int(ar[1])}
+  munulist.append(d1)
+  line=f.readline()
+f.close()
+printData()
+
+
+
+지역변수 전역변수(파이썬에서는 사실상 전역변수는 없음, 변수를 다른곳에서 쓰려면
+                          리턴해서 쓰던가 매개변수로 써야 한다)
+
+매개변수: 외부=>내부
+리턴: 외부<=내부
+
+
+def f1(x):
+    # print(f'f1(): x [{x}] n [{n}]')
+    n=15
+    print(f'f1(): x [{x}] n [{n}]')
+n=10 # 지역변수
+print(f'global: n [{n}]')
+f1(5)
+print(f'global: n [{n}]')
+
+=>
+global: n [10]
+f1(): x [5] n [15]
+global: n [10]
+
+
+
+def add(x,y):
+    return x+y
+
+i=add(3,5)
+print(i)
+=>8
+
+
+
+함수는 두가지가 있음
+1.반환값 있는 함수
+PLSQL에서는 function라고 불림
+
+파이썬에선 
+def f1(a,b):
+  return 반환값/표현식
+
+
+x=f1(x,y)
+
+ex) 구구단
+def multi(x,y):
+    str=f'{x} x {y} = {x*y}'
+    return str
+for i in range(2,10):
+    for j in range(1,10):
+        retstr=multi(i,j)
+        print(retstr)
+
+
+
+
+2.반환값 없는 함수
+PLSQL에서는 procedure라고 불림
+
+파이썬에선 
+def f2(a,b):
+  if ~~~:
+    return
+  else:
+    ~~
+
+f2(x,y)
+
+ex)구구단
+def multi(x,y):
+    str=f'{x} x {y} = {x*y}'
+    print(str)
+for i in range(2,10):
+    for j in range(1,10):
+        multi(i,j)
+
+--------------------------------------------------------------------------------------------------------------
+재귀함수(recursive function)
+:함수 안에서 자기자신을 다시 호출하는 함수
+
+def factorial(n):
+    print(f'n[{n}]')
+    if n==1:
+        return 1
+    else:
+        return n*factorial(n-1)
+
+x=factorial(4)
+print('result=',x)
+
+=>
+n[4]
+n[3]
+n[2]
+n[1]
+result= 24
+4의 경우의수 
+
+
+def factorial(n):
+    total=1
+    for i in range(n,0,-1):
+        total=total*i
+    return total
+
+x=factorial(4)
+print('result=',x)
+=> result= 24
+4의 경우의수
+
+
+def accu(n):
+    total=0
+    for i in range(n+1):
+        total=total+i
+    return total
+x=accu(100)
+print(x)
+1부터 100까지 합 함수
+
+이거를 재귀함수로 다시쓰면
+4*3*2*1
+이
+4+3+2+1로 변한것으로
+
+
+
+def accu(n):
+    if n==1:
+        return 1
+    else:
+        return n+accu(n-1)
+
+x=accu(100)
+print('result=',x)
+이렇게 쓸 수 있다.
+
+--------------------------------------------------------------------------------------------------------------
+객체지향
+
+클래스선언
+
+class Student:
+  def__init__(self): #생성자
+    pass
+  def__init__(self, x, y): #초기화&멤버변수 생성
+    self.grade = x
+    self.name = y 
+  def setGrade(self,x):
+    self.grade=x
+  def getGrade(self):
+    return self.grade
+  def setName(self.y):
+    self.name=y
+  def getName(self):
+    return self.name
+
+
+person = Student(3,'John')
+person.setName('James')
+person.setGrade(4)
+print(person.getName())
+print(person.getGrade())
+
+접근제한자(private/public/default/protected)없음
+필드(멤버변수)선언 없음
+생성자는 오직 하나만 사용할 수 있다.
+
+리스트에 이렇게 클래스를넣을수도 있다
+l1=[ Student(2,'John'),Student(4,'Smith'),Student(1,'Jane') ]
+
+
+
+
+
+class Student:
+    def __init__(self):
+        pass
+    def __init__(self,x,y):
+        self.grade=x
+        self.name=y
+    def setGrade(self,x):
+        self.grade=x
+    def getGrade(self):
+        return self.grade
+    def setName(self,y):
+        self.name=y
+    def getName(self):
+        return self.name
+
+person=Student(3,'John')
+print(f'grade[{person.getGrade()}]')
+print(f'name[{person.getName()}]')
+p1=Student()
+p1.setGrade(4)
+p1.setName('Johanson')
+print(f'p1 grade[{p1.getGrade()}]')
+print(f'p1 name[{p1.getName()}]')
+
+--------------------------------------------------------------------------------------------------------------
+모듈(Module) => .py파일
+메소드(method) => def
+
+from 모듈명 import 메소드명1,..,메소드명n
+
+
+파일 3개를 만든다
+
+from a import a1,a2
+from c import c1,c2
+
+def b1():
+    print('b1 호출')
+
+b1()
+c1()
+a2()
+c2()
+a1()
+
+
+
+def a1():
+    print('a1 호출')
+
+def a2():
+    print('a2 호출')
+
+a1()
+a2()
+
+
+
+def c1():
+    print('c1 호출')
+
+def c2():
+    print('c2 호출')
+
+c1()
+c2()
+
+
+
+여기서 b.py를 실행하면
+
+=>
+a1 호출
+a2 호출
+c1 호출
+c2 호출
+b1 호출
+c1 호출
+a2 호출
+c2 호출
+a1 호출
+임포트한 a1a2c1c2부터 찍힌다
+
+
+
+def a1():
+    print('a1 호출')
+
+def a2():
+    print('a2 호출')
+
+if __name__=="__main__":
+    a1()
+    a2()
+이런식으로
+
+main을 추가해주면 다른 파일에있는것들 실행 안된다.
+
+세 파일 다 붙이면
+
+각각 것들만 실행시킬 수 있음
+-----------------------------------------------------------------------------------------------------------------
+예외처리(exception)
+
+자바에서는
+try {
+   실행문1;
+   ...
+   실행문n;
+} catch(Exception e){
+   실행문;
+} finaly {
+   실행문;
+}
+
+파이썬에서는
+try:
+  실행문1
+  ...
+  실행문n
+except Exception as e:
+  실행문
+finaly:
+  실행문
+
+
+
+try:
+    n=int(input('숫자입력하시오'))
+    x=n**3
+    print(x)
+except Exception as e:
+    print(e)
+finally:
+    print('program terminated.')
+숫자아닌거 넣으면 
+
+
+n=input('숫자입력하시오')
+if n.isnumeric():
+    n=int(n)
+    x=n**3
+    print(x)
+else:
+    print('숫자가 아닙니다')
+print('program terminated.')
+
+---------------------------------------------------------------------------------------------------------------
+정규표현식(Regular Expression)
+0개이상 문자 : *
+1개이상 문자 : .
+t[o|w]o    tao tio teo (too two) 이 두개만 찾는다 t부터 시작해서 o로 끝나는데 중간글자가 o나 w인거를
+               찾음
+t*o 하면 tao tio teo too two 전부 찾는다
+
+
+t[a-z]o 하면 tao tio teo too two t1o t2o t3o 중 중간에 알파벳 들어간 것만 찾는다
+
+t*n 하면 teen ten tear tire tyre tired t로시작해서 n으로 끝나는거 찾음
+
+te* 하면 teen ten tear tire tyre tired중  teen ten tear 만 찾고
+
+t[e]*n 하면 teen ten tear tire tyre tired 중 teen ten 만 찾음
+
+
+---------------------------------------------------------------------------------------------------------------
+카페메뉴관리프로그램
+
+
+from order import Order
+from sales import Sales
+
+class Menu:
+    def __init__(self):
+        self.lMenu=[]
+        try:
+            f=open('D:\LIM\python\menu2.txt','r')
+        except Exception as e:
+            print('메뉴화일을 열 수 없습니다.')
+            return        
+        line=f.readline()
+        while line!='':
+            ar=line.split(',')
+            self.lMenu.append({'name':ar[0],'price':int(ar[1])})
+            line=f.readline()
+        f.close()       
+       
+    def display(self):
+        ndx=1
+        for menu in self.lMenu:
+          print('%2d %-10s %4d'%(ndx,menu['name'],menu['price']))     
+          ndx+=1 
+    def save2file(self):
+        f=open('D:\LIM\python\menu2.txt','w')
+        for menu in self.lMenu:
+            f.write(menu['name']+','+str(menu['price'])+'\n')
+        f.close()  
+
+    def build(self):
+        name=input('메뉴명: ')
+        while name!='':
+            price=input('가격: ')
+            while not price.isnumeric():
+                price=input('가격: ')
+            price=int(price)
+            self.lMenu.append({'name':name,'price':price})
+            name=input('메뉴명: ')
+        self.save2file()
+
+
+    def update(self): #메뉴번호, 새이름, 새가격
+        menu_num=input('메뉴번호: ')
+        while not menu_num.isnumeric():
+                menu_num=input('메뉴번호: ')
+        menu_num=int(menu_num)
+        name=input('새 메뉴명: ')
+        price=input('가격: ')
+        while not price.isnumeric():
+                price=input('가격: ')
+        price=int(price)
+        self.lMenu[menu_num-1]['name']=name    
+        self.lMenu[menu_num-1]['price']=price
+        self.save2file()   
+
+    def delete(self):
+        menu_num=input('삭제할 메뉴번호: ')
+        while not menu_num.isnumeric():
+                menu_num=input('삭제할 메뉴번호: ')
+        menu_num=int(menu_num)
+        del self.lMenu[menu_num-1]
+        self.save2file()
+
+
+
+menu=Menu()  #메뉴정보를 읽어서 초기화.
+menu.display()
+sales=Sales()
+
+num=input('1.주문입력, 2.메뉴관리, 3.실적보기, 0.프로그램 종료 : ')
+while num!='0':
+    if num=='1':
+        order=Order()
+        menu.display()
+        order.build(menu.lMenu)
+        #매출실적에 추가 with order,lOrder,order,mobile
+        sales.append(order.lOrder, order.mobile)
+    elif num=='2':
+        job=input('메뉴관리 - 1.추가, 2.조회, 3.수정, 4.삭제, 0.종료 : ')
+        while job!='0':
+            if job=='1':
+                menu.build()
+            elif job=='2':
+                menu.display()
+            elif job=='3':
+                menu.update()                 
+            elif job=='4':
+                menu.delete()
+            else:
+                print('작업입력오류')
+            job=input('메뉴관리 - 1.추가, 2.조회, 3.수정, 4.삭제, 0.종료 : ')    
+    elif num=='3':
+        sales.display()
+    else:
+        print('작업입력오류')
+    num=input('1.주문입력, 2.메뉴관리, 3.실적보기, 0.프로그램 종료 : ')
+print('프로그램 종료')
+
+
+
+
+class Order파일
+class Order:
+    def __init__(self):
+        self.lOrder=[]
+        self.mobile=''
+    def build(self, menulist):
+        grandTotal=0
+        #메뉴번호 읽기
+        menu_num=input('메뉴번호를 입력하시오 : ')
+        while menu_num!='':
+            if not menu_num.isnumeric():
+                menu_num=input('메뉴번호를 입력하시오 : ')
+                continue
+            menu_num=int(menu_num)
+            #수량(잔) 읽기
+            qty=input('수량을 입력하시오 : ')
+            while not qty.isnumeric():
+                qty=input('수량을 입력하시오 : ')
+            qty=int(qty)
+            #금액계산
+            total=menulist[menu_num-1]['price']*qty
+            print(f'금액: {total}원')
+            grandTotal=grandTotal+total
+            self.lOrder.append({'menu':menulist[menu_num-1]['name'],'qty':qty,'total':total})
+            '''
+            [
+                {'menu':'Latte','qty':3,'total':10500},
+                {}
+            ]
+            '''
+            menu_num=input('메뉴번호를 입력하시오 : ')
+        print(f'주문총금액: {grandTotal}원')
+        self.mobile=input('적립 모바일 번호: ')
+
+
+
+class sales 파일
+from datetime import datetime
+
+class Sales:
+    def __init__(self):
+        self.lSales=[] # 매출시각,모바일번호,메뉴명,수량,금액
+
+    def append(self, orderList, mobile):
+        today=datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        for order in orderList:
+            self.lSales.append({'sold_time':today,'mobile':mobile,\
+                'menu':order['menu'],'qty':order['qty'],'total':order['total']})
+
+    def display(self):
+        grandTotal=0
+        for sale in self.lSales:
+            print('%-20s %11s %10s %2d %6d'%(sale['sold_time'],sale['mobile'],\
+                sale['menu'],sale['qty'],sale['total']))
+        print('-'*50)
+        print('총매출액: '+str(grandTotal))
+
+---------------------------------------------------------------------------------------------------------------
+web crawling - 인터넷을 돌아다니면서 데이터 수집
+
+web scraping - 스크랩
+
+BeautifulSoup(아름다운 스프) - 웹문서 분석 툴
+
+뷰티풀 수프 먼저 설치해야함 or 코랩 colab
+
+
+
+from bs4 import BeautifulSoup as bs
+import urllib.request
+
+try:
+    base_url='https://beomi.github.io/beomi.github.io_old'
+    source_code=urllib.request.urlopen(base_url)
+    plain_text=source_code.read()
+    convert_data=bs(plain_text,'html.parser')
+    print(convert_data)
+
+    for atag in convert_data.find_all('a'):  #<a href=''>sdfsdf</a>
+        print(atag.string)
+except Exception as e:
+    print('error 발생')
+---------------------------------------------------------------------------------------------------------------
+넘파이
+
+https://076923.github.io/posts/Python-numpy-9/
+https://colab.research.google.com/drive/1grZOTKmZw1iCOLxKy-XZlj5RuamUY8PN?hl=ko#scrollTo=s5SyHiadzs_J
+
+
+import numpy as np
+
+a=[1,2,3,4,5]
+b=np.array(a)
+c=np.array([1,3,5])
+print(a)
+print(b)
+print(c)
+
+
+=> 
+[1, 2, 3, 4, 5]
+[1 2 3 4 5]
+[1 3 5]
+보다시피 넘파이배열은 ,가 없다 
+
+
+b=a
+c=a.copy()
+b[0]=99
+print(a)
+print(b)
+print(c)
+
+=>
+[99, 2, 3, 4, 5]
+[99, 2, 3, 4, 5]
+[1, 2, 3, 4, 5]
+b뿐만아니라 a도 0번째 인덱스가 99가 출력
+
+print(b[2])
+print(a[2])
+print(c[-1])
+print(c[0:2])
+=>
+3
+3
+5
+[1, 2]
+파이썬과 똑같음
+
+
+
+
+a=[1,2,3,4,5]
+b=np.array(a)
+c=np.array([1,3,5])
+print(a*2)
+print(b*2)
+print(c+3)
+=>
+[1, 2, 3, 4, 5, 1, 2, 3, 4, 5]
+[ 2  4  6  8 10]
+[4 6 8]
+
+
+리스트*n => n번 반복된 데이터가 리스트로 생성(반복횟수n만큼의 길이로 연장)
+넘파이배열*n =>각 값에 n을 곱한 결과가 나온다(길이불변)
+
+c언어에서는 0은 false고 0이 아니면 true
+
+
+a=np.array([1,2,3],dtype=int)
+b=np.array([1.1,2.2,3.3],dtype=float)
+a1=np.array([1,2,3],dtype=float)
+c=np.array([1,1,0],dtype=bool)
+
+print(a)
+print(b)
+print(a1)
+print(c)
+=>
+[1 2 3]
+[1.1 2.2 3.3]
+[1. 2. 3.]
+[ True  True False]
+
+
+print(np.array([-1,-3,1,0,5,7],dtype=bool))
+=>
+[ True  True  True False  True  True]
+
+
+
+b=np.array([[[1,2],[3,4]],[[5,6],[7,8]],[[9,10],[11,12]]])
+print(b)
+print(b[0][1][1])
+=>
+[[[ 1  2]
+  [ 3  4]]
+
+ [[ 5  6]
+  [ 7  8]]
+
+ [[ 9 10]
+  [11 12]]]
+4
+다차원배열
+
+
+
+print(b.ndim)
+print(b.shape)
+print(b.dtype)
+3                 # 3차원
+(3, 2, 2)         3차원  2개씩 2개
+int64
+
+
+a=np.ones((2,2),dtype=int)        #ones는 다차원배열 크기지정이나 초기화시 사용
+print(a)
+=>
+[[1 1]
+ [1 1]]
+
+
+a=np.zeros((2,2),dtype=int)
+print(a)
+=>
+[[0 0]
+ [0 0]]
+
+
+
+
+np.ones(배열,dtype=int)
+np.zeros()
+np.empty()
+
+
+np.ones_like(리스트,dtype=int)
+np.zeros_like()
+np.empty_like()
+
+np.identity(차원수,dtype=int/float)
+np.eye(row_num, col_num, k=시작인덱스, dtype=int/float)
+
+
+
+a=np.identity(10, dtype=int)
+b=np.eye(7,7, k=2, dtype=int)
+c=np.eye(7,7, k=-2, dtype=int)
+print(a)
+print('\n\n')
+print(b)
+print('\n\n')
+print(c)
+=>
+[[1 0 0 0 0 0 0 0 0 0]
+ [0 1 0 0 0 0 0 0 0 0]
+ [0 0 1 0 0 0 0 0 0 0]
+ [0 0 0 1 0 0 0 0 0 0]
+ [0 0 0 0 1 0 0 0 0 0]
+ [0 0 0 0 0 1 0 0 0 0]
+ [0 0 0 0 0 0 1 0 0 0]
+ [0 0 0 0 0 0 0 1 0 0]
+ [0 0 0 0 0 0 0 0 1 0]
+ [0 0 0 0 0 0 0 0 0 1]]
+
+
+
+[[0 0 1 0 0 0 0]
+ [0 0 0 1 0 0 0]
+ [0 0 0 0 1 0 0]
+ [0 0 0 0 0 1 0]
+ [0 0 0 0 0 0 1]
+ [0 0 0 0 0 0 0]
+ [0 0 0 0 0 0 0]]
+
+
+
+[[0 0 0 0 0 0 0]
+ [0 0 0 0 0 0 0]
+ [1 0 0 0 0 0 0]
+ [0 1 0 0 0 0 0]
+ [0 0 1 0 0 0 0]
+ [0 0 0 1 0 0 0]
+ [0 0 0 0 1 0 0]]
+
+
+
+a=np.eye(7,7, k=-6, dtype=int)
+print(a)
+=>
+[[0 0 0 0 0 0 0]
+ [0 0 0 0 0 0 0]
+ [0 0 0 0 0 0 0]
+ [0 0 0 0 0 0 0]
+ [0 0 0 0 0 0 0]
+ [0 0 0 0 0 0 0]
+ [1 0 0 0 0 0 0]]
+
+
+range(시작값, 끝값+1, 증감)
+
+np,arange(시작값, 끝값+1, step=스텝값)
+
+
+a=np.arange(0,10,step=5)
+b=np.arange(1,10,step=5)
+c=np.arange(0,10,step=3)
+print(a)
+print(b)
+print(c)
+=> 
+[0 5]
+[1 6]
+[0 3 6 9]
+
+
+np.linspace(시작값, 끝값, num=n ,endpoint=True/False, retstep=True/False)
+      num=표시할 갯수
+      endpoint=True: 끝값 포함,
+      retstep=True : 간격 표시
+
+
+a=np.linspace(0,10,num=5,endpoint=True, retstep=True)  0부터 10까지 숫자중에 5개의 숫자를 표시하는데 10을 포함하고 간격을 표시함
+b=np.linspace(1,10,num=5,endpoint=True, retstep=False) 1부터 10까지 숫자중에 5개의 숫자를 표시하는데 10을 포함
+c=np.linspace(0,10,num=5,endpoint=False, retstep=False) 0부터 10까지 숫자중에 5개의 숫자를 표시하는데 10을 포함하지 않는다.
+print(a)
+print(b)
+print(c)
+=>
+(array([ 0. ,  2.5,  5. ,  7.5, 10. ]), 2.5)
+[ 1.    3.25  5.5   7.75 10.  ]
+[0. 2. 4. 6. 8.]
+
+
+배열[시작인덱스:끝인덱스+1:간격]
+
+
+
+슬라이싱
+a=np.array([1,2,3,4,5,6,7,8,9,10,11,12])    0부터 8까지 3간격으로 찍기
+print(a[0:8:3])      
+=>
+[1 4 7]
+
+
+
+a=np.array([
+    [1,2,3],
+    [4,5,6],
+    [7,8,9]])
+
+
+print(a[:,1:])
+=>
+[[2 3]
+ [5 6]
+ [8 9]]
+
+                     
+리쉐이프           
+
+a=np.array([
+    [1,2,3,4],
+    [5,6,7,8],
+    [9,10,11,12]])
+a.shape=(6,2)
+print(a)
+=>
+[[ 1  2]
+ [ 3  4]
+ [ 5  6]
+ [ 7  8]
+ [ 9 10]
+ [11 12]]
+행렬의 형태로 변환
+
+
+a.shape=(4,3)
+print(a)
+=>
+[[ 1  2  3]
+ [ 4  5  6]
+ [ 7  8  9]
+ [10 11 12]]
+
+
+a=np.array([
+    [[1,2,3],[4,5,6]],
+    [[7,8,9],[10,11,12]],
+    [[13,14,15],[16,17,18]]
+])
+a.shape=(2,3,3)
+print(a)
+=>
+[[[ 1  2  3]
+  [ 4  5  6]
+  [ 7  8  9]]
+
+ [[10 11 12]
+  [13 14 15]
+  [16 17 18]]]
+
+
+
+연산
+a=np.array([
+    [1,2,3],
+    [4,5,6],
+    [7,8,9]
+])
+b=np.ones(3,dtype=int)
+print(a)
+print('-'*30)
+print(b)
+print('-'*30)
+print(a+b)
+print('-'*30)
+print(a-b)
+print('-'*30)
+print(a*b)
+print('-'*30)
+print(a/b)
+=>
+[[1 2 3]
+ [4 5 6]
+ [7 8 9]]
+------------------------------
+[1 1 1]
+------------------------------
+[[ 2  3  4]
+ [ 5  6  7]
+ [ 8  9 10]]
+------------------------------
+[[0 1 2]
+ [3 4 5]
+ [6 7 8]]
+------------------------------
+[[1 2 3]
+ [4 5 6]
+ [7 8 9]]
+------------------------------
+[[1. 2. 3.]
+ [4. 5. 6.]
+ [7. 8. 9.]]
+
+
+
+a=np.array([
+    [1,2,3],
+    [4,5,6],
+    [7,8,9]
+])
+b=np.array([
+    [1,2,3],
+    [1,2,3],
+    [1,2,3]
+])
+print(a*b)
+=>
+[[ 1  4  9]
+ [ 4 10 18]
+ [ 7 16 27]]
+
+
+
+매트릭스
+
+
+a = np.array([[1, 2], 
+              [3, 4]])
+b = np.array([[1, 3], 
+              [2, 4]])
+
+print(a*b)
+
+ma = np.mat(a)
+mb = np.mat(b)
+
+print(ma*mb)
+=>
+[[ 1  6]
+ [ 6 16]]
+[[ 5 11]
+ [11 25]]
+
+
+병합 및 분할
+
+a = np.array([[1, 2], [3, 4]])
+b = np.array([[5, 6], [7, 8]])
+c = np.hstack([a, b])
+d = np.vstack([a, b])
+
+print(a)
+print(b)
+print("--------")
+print(c)
+print(d)
+=>
+[[1 2]
+[3 4]]
+[[5 6]
+[7 8]]
+--------
+[[1 2 5 6]
+[3 4 7 8]]
+[[1 2]
+[3 4]
+[5 6]
+[7 8]]
+

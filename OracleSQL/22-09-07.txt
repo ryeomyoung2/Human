@@ -1,0 +1,259 @@
+	|data(DML)	|metadata(DDL)
+-----------------------------------------------------	
+create	|insert		|create
+read	|select		|select
+update	|update		|alter
+delete	|delete		|drop,truncate
+
+
+DCL문(data control language)
+
+-grant dba to ora_user
+ revoke dba to ora_user
+
+-rollback
+ commit
+
+------------------------------------------------------------------------------------------------------------------
+*insert문 문법
+
+     (oracle sql)
+
+1.   insert into 테이블명 values(값1,.......,값n)
+2.   insert into 테이블명 (컬럼명1,....,컬럼명n) values(값1,....,값n)
+
+     (mysql)
+
+     insert into 테이블명 set 컬럼명1=값1,...,컬럼명n=값n
+
+
+create table student(
+name varchar2(12) not null,
+gender char(1) default 'f',
+birthday char(8) default '00000000',
+mobile varchar2(12),
+area varchar2(20),
+english number(3) default 0,
+math number(3) default 0,
+korean number(3) default 0
+);
+insert into student values('john','M','199604**','4133****','seoul',90,80,70);  //위 방법으로 데이터넣기
+insert into student (name, mobile,area)values('james','4133****','seoul');  // 디폴트 제외한것만 넣기
+
+
+------------------------------------------------------------------------------------------------------------------
+*delete문 문법
+
+delete from 테이블명 where 조건문[컬럼명 비교연산자 값]
+	ㄴdelete from student where name='john'   이렇게하면 존만 지워짐 다 지워버리고싶으면 
+ 					    delete from student 하면됨					
+
+------------------------------------------------------------------------------------------------------------------
+*update문 문법
+
+update 테이블명 set 컬럼명1=값1,...,컬럼명n=값n where 조건문[컬럼명 비교연산자 값]
+	ㄴupdate student set math=100; 이렇게하면 전부 수학점수가 100점으로 업데이트
+
+	ㄴupdate student set math=100, english=96, korean=72 where name='james';
+	   제임스의 점수 업데이트
+
+update student set gender='M' where gender is null  (예외적으로 null을 업데이트하고싶을땐 =가 아닌 is를 쓴다)
+------------------------------------------------------------------------------------------------------------------
+*select문 문법
+
+select 컬럼명1,....,컬럼명n from 테이블명1,...,테이블명n
+	ㄴselect * from student  (student 테이블의 모든 컬럼을 읽어서 보여달라는 뜻)
+	
+	* ==> 모든 컬럼들
+
+	ㄴselect name from student    (student테이블의 이름만 조회)
+
+------------------------------------------------------------------------------------------------------------------
+테이블 복사
+
+create table sts as select * from student;  (stduent테이블을 sts라는 이름의 테이블로 하나 더 복사)
+------------------------------------------------------------------------------------------------------------------
+뷰
+
+
+view:복잡한 조건의 select문이 반복적으로 사용될 때, 번거로움을 줄여주기 위해 사용
+
+1. create view 뷰이름 as select 컬럼명1,...,컬럼명n from 테이블1,...,테이블n where 조건문
+2. create or replace view 뷰이름 as select 컬럼명1,...,컬럼명n from 테이블1,...,테이블n where 조건문
+
+
+ 
+
+create view worker as select emp_name, salary from employees where hire_data>20/12/31 and salary<=10000
+다른부서가 특정 조건 employees의 일부만(20/12/31일 이후 입사했고 봉급이 10000이하인사람중 이름이랑 봉급만) 열람할 수 있게 할때 씀
+select * from worker 로 조회가능
+
+create or replace view worker as select emp_name, salary from employees 
+있으면 고치고 없으면 새로만들기
+
+drop view 뷰이름; (뷰 삭제)
+
+select view_name from user_views; (만들었던 뷰 조회)
+------------------------------------------------------------------------------------------------------------------
+
+index : data의 검색속도를 빠르게 하기위해 사용
+
+인덱스 생성
+create index 인덱스명 on 테이블명(컬럼명1,...,컬럼명n)
+create or replace index 인덱스명 on 테이블명(컬럼명1,...,컬럼명n)
+
+ex)    create or replace index ndx_name on student(name)
+
+drop index 인덱스명   (인덱스삭제)
+select index_name form user_indexes (인덱스 조회)
+
+------------------------------------------------------------------------------------------------------------------
+시노님:데이터테이블의 별명 붙여주기
+
+1. create synonym 별명 for 테이블명
+2. create or replace synonym 별명 for 테이블명
+
+drop synonym 별명 (시노님 삭제)
+
+------------------------------------------------------------------------------------------------------------------
+시퀀스 sequence : 일련번호 자동생성기(number generator)
+
+create sequence 시퀀스명 start with 1 increment by 1  =>시퀀스생성
+
+시퀀스명.nextval       => 새 시퀀스 번호 가져오기 (사용될때마다 증가한다)
+
+select 시퀀스명.currval from dual    =>마지막 시퀀스 번호 확인
+
+
+
+create sequence seq_mid start with 1 increment by 1;            =>시퀀스생성
+insert into student values(seq_mid.nextval,'john');
+select * from student;
+insert into student values(seq_mid.nextval,'james');
+insert into student values(seq_mid.nextval,'johanson');
+insert into student values(seq_mid.nextval,'jacob');
+select seq_mid.currval from dual;			 =>마지막 시퀀스 번호 확인
+
+
+mysql에서는 시퀀스 안쓰고 아래처럼 쓴다.
+
+create table student (
+mid number auto_increment,
+name varchar(12)
+)
+
+insert into student set name='john';
+------------------------------------------------------------------------------------------------------------------
+머지
+
+merge: 조건에 맞는 데이터가 없으면 insert, 있으면 update 수행
+(mysql의 replace와 비슷, 실무에선 잘 안씀)
+------------------------------------------------------------------------------------------------------------------
+drop table           schema+data 둘다 날아가고 복구불능
+truncate table      data만 날아감, 복구불능
+delete from         data만 날아감, 복구가능(rollback)
+
+select * from student;
+commit;     -확정
+delete from student;
+rollback;     -되돌리기
+이렇게하면 커밋 이후까지만 롤백가능
+
+------------------------------------------------------------------------------------------------------------------
+의사칼럼
+
+select rownum,rowid,employee_id,emp_name from employees; 했을때는 나오지만
+select * from employees; 할때는 안나오는 컬럼
+------------------------------------------------------------------------------------------------------------------
+연산자
+-산술연산자  +, -, *(asterisk), /, ||(문자열 연결 연산자)
+
+-비교연산자 =, !=, <>, >, <, >=, <=  
+컬럼명 is null, 컬럼명 is not null
+select * from employees where salary is not null;    =>null아닌것 조회
+
+-논리연산자 and,or,not
+select emp_name,salary,hire_date from employees where salary<5000 and hire_date < '05/01/01';
+
+-집합연산자(sql문에만) union/union all(합집합), intesect(교집합), minus(차집합)
+
+
+
+select 3+5 from dual; (오라클sql)
+select 3+5;  (mysql)
+select salary, salary*1.1 from employees; =>곱하기 연산자로 10%인상한 봉급 보기
+select emp_name,salary from employees where salary*2>10000;   
+=>봉급2배로 올려주면 10000보다 커지는사람 조회
+
+select '['||emp_name||']' from employees; 입력하면
+
+[Donald OConnell]
+[Douglas Grant]
+[Jennifer Whalen] 
+
+이런식으로 나옴
+
+select employee_id,emp_name,salary from employees where salary>=5000 and salary<10000;
+=>월급이 5000불이상 10000불미만 사번,이름,월급
+
+select * from employees where manager_id is null;
+=>매니저 아이디를 갖고있지 않는, 즉 사장 찾기
+
+
+select emp_name from employees where manager_id =100;
+=>매니저 아이디가 사장의 사번인 사람 아이디 찾기(사장직속부하직원 찾기)
+------------------------------------------------------------------------------------------------------------------
+표현식
+
+case when 조건1 then 값1 when 조건2 then 값2 else 값 end
+=> 반드시 select안에만 사용(where에서 사용 안함)
+
+	 select employee_id, salary,
+	 case when salary<=5000 then '   c' 
+	 when salary>=5000 and salary<=10000 then '   b' 
+	 else '   a'
+	 end as grade from employees;
+
+컬럼명 as aliasname     (aliasname=synonym같은 개념)
+
+not(salary>=2500)   => salary < 2500
+not salary>4000
+
+select salary from employees where not salary>10000
+
+컬럼명 between 값A and 값B  => 컬럼명>=값a and 컬럼명<= 값B
+
+salary between 5000 and 10000  => salary>=5000 and salary<=10000
+
+컬럼명 in(값1,....,값n)  == 
+컬럼명=값1 or ....or 컬럼명=값n == 
+컬럼명 =any(값1,...,값n)
+
+셋다 같음
+
+
+ex) select emp_name,salary from employees where salary between 5800 and 7000;
+ex) select emp_name,salary from employees where salary in(3000,4000,5000,6000,7000);
+ex) select emp_name,salary from employees where salary=any(3000,4000,5000,6000,7000);
+ex) select emp_name,salary from employees where salary=some(3000,4000,5000,6000,7000);
+
+
+name like 'a_'    a로 시작하는 두글자 찾기
+name like 'a__'  a로 시작하는 세글자 찾기
+name like 'a_d__'  a로 시작하고 중간에 d가 포함된 5글자 찾기
+name like 'J%'   J로 시작하는 모든 문장 찾기(대소문자구분해야됨)
+name like '%son' son으로 끝나는 모든 문장 찾기
+
+select emp_name from employees order by emp_name;
+abcde...순으로 이름찾기
+
+select emp_name from employees where emp_name like'John%';
+이름이 존으로 시작하는 모든사람 찾기
+select emp_name from employees where emp_name like'%son';
+성이 son으로 끝나는 모든 사람 찾기
+select emp_name from employees where emp_name like'%son %';
+이름이 son으로 끝나는 모든 사람 찾기
+select emp_name from employees where emp_name like'% S%';
+성이 s로 시작하는 모든 사람 찾기
+select emp_name from employees where emp_name like'%Y%' or emp_name like'%y%';
+이름 전체에서  Y,y가 들어가는 모든 사람 찾기

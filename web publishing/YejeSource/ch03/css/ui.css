@@ -1,0 +1,128 @@
+@charset "utf-8";
+@import url(https://cdn.rawgit.com/theeluwin/NotoSansKR-Hestia/master/stylesheets/NotoSansKR-Hestia.css);
+/* 태그의 초기화 */
+html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, button, abbr, acronym, address, code, del, 
+dfn, em, img, strong, sub, sup, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, 
+td, hr{margin:0;padding:0;font-size:100%;box-sizing: border-box;}
+body{height:100%;min-height:100%;font-family:'Noto Sans Korean','Malgun Gothic','맑은고딕','돋움',dotum, sans-serif;font-size:16px;color:#737373;line-height:1.5;background:url(../images/content_bg4.png) repeat;}
+h1, h2, h3, h4, h5, h6 {font-weight:normal}
+ol, ul, li {list-style:none}
+table {width:100%; border-collapse:collapse;border-spacing:0}
+form, fieldset, iframe {display:block;border:0}
+img, button {border:0 none;vertical-align:top;}
+hr {height:0; display:none}
+i, em, address{font-style:normal}
+label, button{cursor:pointer}
+blockquote, q {quotes:none}
+caption, legend {overflow:hidden;visibility:hidden;position:absolute;width:0;height:0;padding:0;margin:0;font-size:0;text-indent:-100%;white-space:nowrap;z-index:-1}
+header, footer, section, article, aside, nav, hgroup, details, menu, figure, figcaption {display:block;box-sizing: border-box;}
+input, textarea, select, button {font-family:'Noto Sans Korean','Malgun Gothic','맑은고딕','돋움',dotum, sans-serif;font-size:16px;color:#919090;line-height:1.5;letter-spacing:0;vertical-align:middle; border:none;}
+input, textarea {margin:0;padding:0;  background:none; box-sizing:border-box;}
+textarea {resize:none}
+a {color:#919090;text-decoration:none}
+a:link, a:visited {text-decoration:none}
+a:hover {text-decoration:none}
+.blind{display: none;overflow: hidden;position: absolute;width: 0;height: 0;padding: 0;margin: 0; font-size: 0;line-height: 0; text-indent: -9999em;visibility: hidden;outline: none;z-index: -1;}
+html,body{overflow:hidden;height:100%;}
+
+/* 여기서부터 CSS 사용자 정의 시작. */
+
+/*layout*/
+/* 오른쪽 padding을 180px */
+#wrap{width:100%; height:100%; padding-right:180px;}
+/* 보이지 않게 함 */
+/* > 는 자식을 의미함. combinator 선택자*/
+/* TEST : font-size 변경시 상단에 보이는 것이 확인됨. */
+#wrap > h1{font-size:0px;}
+/* 로고의 위치를 절대위치로 지정 */
+/* TEST : right/top의 위치 변경 후 확인. */
+header .logo_box{position:absolute; right:35px; top:75px;}
+/* 절대 위치에 지정한 곳에 100px로 이미지 처리 */
+/* TEST : width의 px를 변경 후 확인 */
+header .logo_box img{width:100px;}
+/* header는 오른쪽/위로 붙여서 표현 */
+/* z-index는 z축의 인덱스. 포토샵의 layer 같은 의미. 인덱스 높을 수록 그림이 위에 위치함.(즉, 덮어버림)*/
+#wrap header{width:180px; height:100%; position:fixed; right:0px; top:0px; 
+    background:url(../images/menu_bg1.png) repeat-y; z-index:11;}
+
+    /* width:180px; height:100%;인 것 내에서 width:100%(180px을 의미) height:100%임.*/
+#wrap header nav{width:100%; height:100%;} 
+/* flex이면서 밑으로 나열(column), 위아래가 같도록 정렬(center) */
+/* TEST : flex-direction(row,row-reverse,column,column-reverse) 변경 */
+/* TEST : justify-content(flex-start,flex-end,space-between,center,space-around) 변경 */
+#wrap header nav ul{width:100%; height:100%; display:flex; flex-direction:column; justify-content:center;}
+/* margin은 시계방향 top, right, bottom, left*/
+/* TEST : margin 값 변경하면서 확인. */
+/* TEST : position : absolute로 변경 TEST */
+#wrap header nav ul li{margin:0px 0px 10px 30px; padding-left:15px; position:relative;} 
+/* TEST : font관련값 변경하면서 확인. ling-height 변경하면서 확인 */
+#wrap header nav ul li a{font-size:16px; color:#fff; font-weight:600; line-height:30px;}
+/* 가상요소를 통해서 점을 찍어서 표현 */
+/* TEST : border-radius 100%로 변경시 */
+/* TEST : content가 없을 경우 점이 표현안됨. 즉, content 안에 점을 표현하는 듯 함. */
+#wrap header nav ul li:after{content:""; display:block; width:5px; height:5px; 
+    border-radius:50%; background:#fff; position:absolute; left:0px; top:13px;}
+/* hover(마우스위에 올라왔을때) red로 강조함 */
+/* 4장에서 확인. on class의 의미는? JQuery에서 선택이 된 것을 ON으로 처리하고 있음 */
+/* li tag(메뉴명)에 대한 mouseover 처리 */
+/* TEST : 색상 변경 후 확인할 것. */
+#wrap header nav ul li:hover a,#wrap header nav ul li.on a{color:#5331ed;} 
+/* 점에 대한 mouseover 처리 */
+#wrap header nav ul li:hover:after,#wrap header nav ul li.on:after{background:#31ed31;}
+
+footer{width:180px; position:fixed; right:0px; bottom:0px; padding:0px 20px 30px 20px; 
+    font-size:11px; color:#7e7e7e; z-index:12;}
+footer address{padding:0px 0px 15px 0px;}
+/* transition은 애니매이션의 시간 (0.4초) */
+/* top(-31px)은 위의 영역을 침범하여 표시한 것임. */
+/* TEST : transition의 값을 5초로 변경 후 확인. */
+/* TEST : top -31 ==> 0px로 변경 후 확인 */
+footer > a{display:block; width:16px; height:16px; position:absolute; top:-31px; transition:.4s;} 
+/* TEST : no-repeat 제거 후 확인 */
+footer > a.face{background:url(../images/social_b_facebook.png) no-repeat; right:18px;} 
+footer > a.face:hover{background:url(../images/social_b_facebook_hover.png) no-repeat;} 
+footer > a.twit{background:url(../images/social_b_twitter.png) no-repeat; right:48px;} 
+footer > a.twit:hover{background:url(../images/social_b_twitter_hover.png) no-repeat;} 
+/* TEST right 변경 후 확인 */
+footer > a.instar{background:url(../images/social_b_instar.png) no-repeat; right:80px;} 
+footer > a.instar:hover{background:url(../images/social_b_instar_hover.png) no-repeat;}
+/* max-width는 화면 해상도가 1200px이 넘더라도 1200px만 표현, margin:0 auto는 모든 margin을 0px(상하) auto(좌우 동일마진) */
+#container{width:100%; height:100%; position:relative; max-width:1200px; margin:0 auto;} 
+/* 4개의 content를 25%로 동일하게 적용 */
+/* TEST : width 50%로하고, 각 메뉴별 left를 0%, 50%, 100%, 150%로 하여 TEST */
+#container .content{width:25%; height:100%; position:absolute;} 
+/* position이 absolute 이므로 left의 크기가 25%씩 연결되어 붙음 */
+/* repeat은 x,y가 모두 적용됨. */
+#container #menu1{left:0%; background:url(../images/content_bg1.png) repeat;} 
+#container #menu2{left:25%; background:url(../images/content_bg2.png) repeat;} 
+#container #menu3{left:50%; background:url(../images/content_bg3.png) repeat;} 
+#container #menu4{left:75%; background:url(../images/content_bg4.png) repeat;}
+/*가상요소 활용하기*/
+/* content <section> 안에서 before/after */
+#container .content:before,#container .content:after{content:""; display:block; position:absolute;} 
+#container .content:before{width:1px; height:100%; background:#000; left:0; top:0; z-index:4;}
+/* 각 항목내에서 30px, 180px 위치에 붉은색 표시 보임. */
+/* TEST : 색상 바꾸어서 확인할 것. */
+#container .content:after{left:30px; top:180px; font-size:25px; font-weight:700; color:#ed3140;}
+
+/* 해당컨텐츠를 통해서 화면에 보임. */
+/* content는 TEXT를 처리하는 것임. */
+/* #container .content:after와 #container #menu1:after 는 같은 것임. */
+/* left, top 30px, 180px 위치에 내용 정의 */
+/* TEST: 아래 각 메뉴별 내용 지우고 확인할 것. ==> html 파일이 아닌 CSS의 content 요소로 화면에 표시하고 있음을 알 수 있음. */
+#container #menu1:after{content:"회사소개";}  
+#container #menu2:after{content:"도서소개";} 
+#container #menu3:after{content:"FAQ";} 
+#container #menu4:after{content:"Contact Us";}
+/* conbox 안에는 아무것도 없어서 before만 처리함. */
+/* conbox 안에는 아무것도 없어서 before ==> after로 바꾸어도 문제없음. */
+#container .content .conbox:before{content:""; display:block; position:absolute;}
+ /*TEST 각 메뉴별 right 값 변경 ==> 음수는 다른 영역으로 침범함을 알 수 있음  */
+#container #menu1 .conbox:before{background:url(../images/main_ico1.png) no-repeat; width:350px; height:260px; right:-10px; top:130px; background-size:100%;} 
+#container #menu2 .conbox:before{background:url(../images/main_ico2.png) no-repeat; width:180px; height:470px; right:-30px; top:180px; background-size:100%;} 
+#container #menu3 .conbox:before{background:url(../images/main_ico3.png) no-repeat; width:270px; height:310px; right:-60px; top:30px; background-size:100%;} 
+#container #menu4 .conbox:before{background:url(../images/main_ico4.png) no-repeat; width:350px; height:400px; right:-170px; top:100px; background-size:100%;}
+/* h2는 안보임. */
+/* TEST : opacite 값의 변경 ==> 상단의 메뉴명은 숨겨져 있음을 알 수 있음 */
+#container .content h2{opacity:0;}
+

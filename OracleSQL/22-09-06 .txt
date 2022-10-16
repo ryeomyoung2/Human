@@ -1,0 +1,134 @@
+table CRUD(create read update delete)      
+
+
+ //테이블생성
+create table student(
+name varchar2(32),
+mobile varchar2(12)
+);
+
+       //테이블에 데이터삽입                                   
+insert into student values('john', '77778888');       
+insert into student values('james', '44445555');
+insert into student values('jacob', '23235656'); 
+
+       //테이블조회
+select * from student;
+
+       //데이터삭제
+delete from student where name='jacob';
+
+       //데이터수정
+update student set mobile='33335555' where name='james';
+
+
+      //테이블 삭제
+drop table student;
+-----------------------------------------------------------------------------------------------------------------------------------------------------
+문자열 변수 타입 정할때 char(character) - 데이터 길이가 최대길이보다 작으면 나머지부분을 빈칸으로 채우기때문에 varchar2로 쓰는게 좋음
+
+varchar2 - 최대길이보다 작게 데이터길이만큼만 할당함 (오라클SQL과 달리 MySQL에서는 varchar로 쓴다.
+
+또한 number 대신 decimal을 쓴다.)
+
+숫자(Number)
+-정수 10
+-실수 10.0(floating point number)
+
+int i =0;
+float f = 3.14f;
+
+날짜데이터
+date
+timestamp
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------
+drop table member;
+
+create table member(
+m_id decimal,
+name varchar2(12),
+gender char(1),
+created date,
+ts timestamp
+);
+
+insert into member values(1, 'john','M', sysdate, systimestamp);
+insert into member values(100000, 'johanson','F',sysdate, systimestamp);
+
+select * from member;
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+create table 테이블명(
+컬럼명 데이터타입(길이) 제약조건(constraint)
+)
+
+
+
+
+create table student(
+name varchar2(32)not null,
+gender varchar2(1),
+date_of_birth varchar2(6),
+mobile varchar2(12)unique,
+region varchar2(30)
+);
+이렇게해놓으면 네임에 null넣을수 없음
+또한 유니크 붙여놓으면 똑같은 값 못넣음, 하지만 null은 들어간다.
+
+insert into student(name) values('ㅇㅇㅇ');
+insert into student(name,mobile) values('ㅇㅇㅇ','44445555');
+이런식으로 데이터를 하나만 넣거나 원하는것만 넣을수도 있음
+-----------------------------------------------------------------------------------------------------------------------------------------------------
+
+drop table student;
+create table student(
+name varchar2(32)not null,
+gender char(1) default 'F'
+);
+insert into student(name) values('james');
+insert into student values('john','m');
+select * from student;
+
+결과
+
+name 	| gender
+-------------------
+james	| F
+john	| m
+
+===> default 문으로 젠더추가 안해놓으면 F로 자동으로 출력되는 것을 확인할 수 있음.
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------
+
+drop table 테이블명 ==>테이블 삭제하기 1(데이터도 다 날아감,   스키마+데이터)   
+truncate table 테이블명 ==>이건 데이터만 다날아간다. 테이블은 남아있음
+
+schema(스키마)
+
+
+-유저가 만든 테이블리스트 전부 조회 select table_name from user_tables;
+
+-테이블명 수정  rename student to sts; (테이블명을 student에서 sts로 수정)
+
+-컬럼이름/타입/길이 (Oracle SQL)
+alter table 테이블명 add 새컬럼명 타입(길이)  ==>새 컬럼추가
+
+alter table 테이블명 drop column 기존 컬럼명 ==>기존컬럼 이름변경
+
+alter table 테이블명 rename column 컬럼명 to 새컬럼명 ==>기존컬럼 이름변경(타입은 그대로임)
+
+alter table 테이블명 modify 기존컬럼명 새타입(새길이) ==>기존컬럼 타입이랑 길이변경
+
+
+-컬럼이름/타입/길이 (MySQL)
+alter table 테이블명 change 컬럼명 새컬럼명 새타입(새길이) ==>기존컬럼 이름,타입,길이 변경하는법 (안바꿀것은 그대로 냅두면됨)
+
+
+
+
+
+

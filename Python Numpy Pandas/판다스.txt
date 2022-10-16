@@ -1,0 +1,946 @@
+import pandas as pd
+conda activate myPandas에서 설치해야됨
+
+dict_data={'a':1,'b':2,'c':3}
+sr=pd.Series(dict_data)
+
+print(type(sr))
+print('-'*30)
+print(sr)
+=>
+dict_data={'a':1,'b':2,'c':3}
+sr=pd.Series(dict_data)
+
+print(type(sr))
+print('-'*30)
+print(sr)
+dict_data={'a':1,'b':2,'c':3}
+sr=pd.Series(dict_data)
+​
+print(type(sr))
+print('-'*30)
+print(sr)
+<class 'pandas.core.series.Series'>
+------------------------------
+a    1
+b    2
+c    3
+dtype: int64
+
+
+
+
+print(sr.index)
+print('-'*30)
+print(sr.values)
+=>
+Index(['a', 'b', 'c'], dtype='object')
+------------------------------
+[1 2 3]
+
+
+
+
+
+list_data=['2019-01-02',3.14,'ABC',100,True]
+sr=pd.Series(list_data)
+print(sr)
+=>
+0    2019-01-02
+1          3.14
+2           ABC
+3           100
+4          True
+dtype: object
+
+
+
+
+dict_data={'c0':[1,2,3],'c1':[4,5,6],'c2':[7,8,9],'c3':[10,11,12],'c4':[13,14,15]}
+df=pd.DataFrame(dict_data)
+print(df)
+=>
+   c0  c1  c2  c3  c4
+0   1   4   7  10  13
+1   2   5   8  11  14
+2   3   6   9  12  15
+
+
+
+
+df=pd.DataFrame([[15,'남','덕영중'],[17,'여','수리중'],[14,'공','영창초']],
+               index=['준서','예은','현지'], #행이름
+               columns=['나이','성별','학교'] #열이름
+               )
+print(df)
+=>
+   나이 성별   학교
+준서  15  남  덕영중
+예은  17  여  수리중
+현지  14  공  영창초
+
+
+
+
+df=pd.DataFrame([['John','44445555','Male','LA'],['Jane','43215432','Female','LV'],['Jacob','77778888','Male',''],['Johanson','12345432','Female','MI']],
+               index=['first','second','third','fourth'], #행이름
+               columns=['name','mobile','gender','city'] #열이름
+               )
+print(df)
+=>
+df=pd.DataFrame([['John','44445555','Male','LA'],['Jane','43215432','Female','LV'],['Jacob','77778888','Male',''],['Johanson','12345432','Female','MI']],
+               index=['first','second','third','fourth'], #행이름
+               columns=['name','mobile','gender','city'] #열이름
+               )
+print(df)
+df=pd.DataFrame([['John','44445555','Male','LA'],['Jane','43215432','Female','LV'],['Jacob','77778888','Male',''],['Johanson','12345432','Female','MI']],
+               index=['first','second','third','fourth'], #행이름
+               columns=['name','mobile','gender','city'] #열이름
+               )
+print(df)
+            name    mobile  gender city
+first       John  44445555    Male   LA
+second      Jane  43215432  Female   LV
+third      Jacob  77778888    Male     
+fourth  Johanson  12345432  Female   MI
+
+
+
+
+df.index=['1st','2nd','3th','4th']
+df.columns=['이름','모바일','성별','도시']
+print(df)
+=>
+           이름       모바일      성별  도시
+1st      John  44445555    Male  LA
+2nd      Jane  43215432  Female  LV
+3th     Jacob  77778888    Male  NY
+4th  Johanson  12345432  Female  MI
+
+
+
+
+df.rename(index={'1st':'첫째','3th':'셋째','2nd':'둘째'})
+df.rename(columns={'도시':'city','모바일':'mobile','성별':' gender'})
+=>
+	이름	mobile	gender	city
+1st	John	44445555	Male	LA
+2nd	Jane	43215432	Female	LV
+3th	Jacob	77778888	Male	NY
+4th	Johanson	12345432	Female	MI
+
+
+
+df.drop(['2nd','3th'])   #행(axis=0:default), 열(axis=1)
+=>
+이름	모바일	성별	도시
+1st	John	44445555	Male	LA
+4th	Johanson	12345432	Female	MI
+
+
+
+df.drop(['모바일','도시'],axis=1)
+=>
+
+이름	성별
+1st	John	Male
+2nd	Jane	Female
+3th	Jacob	Male
+4th	Johanson	Female
+
+
+
+df
+=> 
+이름	모바일	성별	도시
+1st	John	44445555	Male	LA
+2nd	Jane	43215432	Female	LV
+3th	Jacob	77778888	Male	NY
+4th	Johanson	12345432	Female	MI
+
+
+
+df.drop(문자열/리스트 [axis=0, inplace=True])    #inplace가 true면 원본에 반영 false면(안쓰면) 원본유지
+           '이름'                                               #axis가 0이면 행 삭제 1이면 열 삭제 안쓰면 행삭제
+           ['이름1',...,'이름n']
+
+df.loc[행이름]      
+
+df.loc[[행이름1,...,행이름n]]
+
+df.loc[행인덱스,열이름]
+
+df.loc[행이름]=[값1,...,갑n]
+
+df.iloc[시작인덱스:끝인덱스+1:스텝]
+
+df.iloc[행인덱스,열인덱스]
+
+df.iloc[[행인덱스리스트],[열인덱스리스트]]
+
+df[열이름]  
+
+df.열이름
+
+df.[[열이름1,...,열이름n]]
+
+df.[열이름]=초기값 : 기존 열 이름이면 초기값으로 모두 채운다.(이전값 모두 삭제)
+                            새 열 이름이면 열을 추가하고 초기값으로 채운다.
+
+df.loc[열이름]=초기값
+
+de.setindex([열이름1,...,열이름n])
+
+df.reindex([행이름1,...,행이름n], fill_value=값) #새 행 이름이 이미 존재하면 기존 데이터값은 유지된다.
+                                                               새 행 이름이 기존행중에 없으면 그 데이터값은 삭제된다
+
+df.sortindex(ascending=False/True)
+
+
+df.loc['2nd']                                 #행만 추출
+=>
+이름         Jane
+모바일    43215432
+성별       Female
+도시           LV
+Name: 2nd, dtype: object
+
+
+
+
+df.iloc[3]
+=>
+이름     Johanson
+모바일    12345432
+성별       Female
+도시           MI
+Name: 4th, dtype: object
+
+
+
+
+df[['모바일','이름']]
+=>
+	모바일	이름
+1st	44445555	John
+2nd	43215432	Jane
+3th	77778888	Jacob
+4th	12345432	Johanson
+
+
+
+
+exam_data={'이름':['서준','우현','인아'],'수학':[90,80,70],'영어':[98,89,95],'음악':[85,95,100],'체육':[100,90,90]}
+print(df)
+
+=>
+   이름  수학  영어   음악   체육
+0  서준  90  98   85  100
+1  우현  80  89   95   90
+2  인아  70  95  100   90
+
+
+
+df.iloc[0:3:2]
+=>
+	이름	수학	영어	음악	체육
+0	서준	90	98	85	100
+2	인아	70	95	100	90
+
+
+
+df.iloc[::-1]   #거꾸로
+=>
+	이름	수학	영어	음악	체육
+2	인아	70	95	100	90
+1	우현	80	89	95	90
+0	서준	90	98	85	100
+
+
+
+df.loc[0,'영어']
+=>
+98
+
+df.iloc[0,2]
+=>
+98
+
+df.iloc[1,0]
+=>
+'우현'
+
+df.iloc[2,[2,3]]
+=> 
+영어     95
+음악    100
+Name: 2, dtype: object
+
+
+
+df.iloc[[0,2],3]
+=>
+0     85
+2    100
+Name: 음악, dtype: int64
+
+
+df.iloc[[0,2],[3,4]]
+=>
+
+음악	체육
+0	85	100
+2	100	90
+
+
+
+df.loc[[0,2],['음악','체육']]     #숫자말고 문자열 쓰려면 iloc가 아닌 loc로 
+=>
+	음악	체육
+0	85	100
+2	100	90
+
+
+df['국어']=0 #열추가 없으면 새로 만들고 있으면 기존데이터 삭제하고 새 값으로 채운다.
+df
+=>
+
+이름	수학	영어	음악	체육	국어
+0	서준	90	98	85	100	0
+1	우현	80	89	95	90	0
+2	인아	70	95	100	90	0
+
+
+df.loc[3]=['동규',90,80,70,60,96]
+df
+=>
+
+이름	수학	영어	음악	체육	국어
+0	서준	90	98	85	100	100
+1	우현	80	89	95	90	100
+2	인아	70	95	100	90	100
+3	동규	90	80	70	60	96
+
+
+
+
+   이름  수학  영어   음악   체육
+0  서준  90  98   85  100
+1  우현  80  89   95   90
+2  인아  70  95  100   90
+
+df.transpose()
+=>
+	0	1	2
+이름	서준	우현	인아
+수학	90	80	70
+영어	98	89	95
+음악	85	95	100
+체육	100	90	90
+
+
+print(df.T)
+=>
+      0   1    2
+이름   서준  우현   인아
+수학   90  80   70
+영어   98  89   95
+음악   85  95  100
+체육  100  90   90
+
+
+print(df.set_index('이름'))
+=>
+	수학	영어	음악	체육
+이름				
+서준	90	98	85	100
+우현	80	89	95	90
+인아	70	95	100	90
+
+
+
+
+reindex 41p
+
+
+df.reindex(['r0','r1','r2','r3','r4'],fill_value=0)
+=>
+
+이름	수학	영어	음악	체육
+r0	0	0	0	0	0
+r1	0	0	0	0	0
+r2	0	0	0	0	0
+r3	0	0	0	0	0
+r4	0	0	0	0	0
+
+
+df.reindex(['r0','r1','r2','r3','r4'])
+=>
+
+이름	수학	영어	음악	체육
+r0	NaN	NaN	NaN	NaN	NaN
+r1	NaN	NaN	NaN	NaN	NaN
+r2	NaN	NaN	NaN	NaN	NaN
+r3	NaN	NaN	NaN	NaN	NaN
+r4	NaN	NaN	NaN	NaN	NaN
+
+
+
+
+dict_data={'c0':[1,2,3],'c1':[4,5,6],'c2':[7,8,9],'c3':[10,11,12],'c4':[13,14,15]}
+print(dict_data)
+df=pd.DataFrame(dict_data,index=['r0','r1','r2'])
+print(df)
+ndf=df.reindex(['x0','x1','x2','x3','x4'])
+print(ndf)
+=>
+{'c0': [1, 2, 3], 'c1': [4, 5, 6], 'c2': [7, 8, 9], 'c3': [10, 11, 12], 'c4': [13, 14, 15]}
+    c0  c1  c2  c3  c4
+r0   1   4   7  10  13
+r1   2   5   8  11  14
+r2   3   6   9  12  15
+    c0  c1  c2  c3  c4
+x0 NaN NaN NaN NaN NaN
+x1 NaN NaN NaN NaN NaN
+x2 NaN NaN NaN NaN NaN
+x3 NaN NaN NaN NaN NaN
+x4 NaN NaN NaN NaN NaN
+
+
+dict_data={'c0':[1,2,3],'c1':[4,5,6],'c2':[7,8,9],'c3':[10,11,12],'c4':[13,14,15]}
+print(dict_data)
+df=pd.DataFrame(dict_data,index=['r0','r1','r2'])
+print(df)
+ndf=df.reindex(['r0','r1','r2','x3','x4'],fill_value=0)
+print(ndf)
+=>
+{'c0': [1, 2, 3], 'c1': [4, 5, 6], 'c2': [7, 8, 9], 'c3': [10, 11, 12], 'c4': [13, 14, 15]}
+    c0  c1  c2  c3  c4
+r0   1   4   7  10  13
+r1   2   5   8  11  14
+r2   3   6   9  12  15
+    c0  c1  c2  c3  c4
+r0   1   4   7  10  13
+r1   2   5   8  11  14
+r2   3   6   9  12  15
+x3   0   0   0   0   0
+x4   0   0   0   0   0
+
+print(ndf.sort_index(ascending=False))
+=>
+    c0  c1  c2  c3  c4
+x4   0   0   0   0   0
+x3   0   0   0   0   0
+r3   0   0   0   0   0
+r2   3   6   9  12  15
+r0   1   4   7  10  13
+
+
+
+student1=pd.Series({'국어':100,'영어':80,'수학':90})
+percentage=student1/200
+print(percentage)
+=>
+국어    0.50
+영어    0.40
+수학    0.45
+dtype: float64
+
+
+------------------------------------------------------------------------------------------------------------------
+
+Series연산
+-Series VS 값 : 시리즈의 모든 원소에 연산(+,-,/,*)을 수행
+-Series VS Series : 같은 키 값끼리 연산(+,-,/,*)을 수행
+                         같은 키값이 없으면 NaN으로 채운다
+                         add/sub/mul/div 연산은 같은 키값이 없으면 ,
+                                                           fill_value에 지정한 값으로 연산을 수행한다.
+
+student1=pd.Series({'국어':100,'영어':80,'수학':90})
+student2=pd.Series({'국어':90,'영어':80,'수학':80})
+print(student1-student2)
+=>
+국어    10
+영어     0
+수학    10
+dtype: int64
+더하기 곱하기 나누기도 똑같음
+
+
+
+student1=pd.Series({'국어':100,'영어':80,'수학':90})
+student2=pd.Series({'국어':90,'수학':80})
+print(student1-student2)
+print(student1.add(student2,fill_value=0))
+=>
+국어    10.0
+수학    10.0
+영어     NaN
+dtype: float64
+국어    190.0
+수학    170.0
+영어     80.0
+dtype: float64
+없는값과 연산하면 무조건 NaN이 나오는데 fill_value=0 를 넣으면 없는 데이터는 0으로 간주
+
+
+
+DataFrame연산
+-DataFrame VS 값(숫자): DataFrame의 모든 원소에 연산(+,-,/,*)을 수행
+-DataFrame VS DataFrame : 같은 이름의 행, 같은 이름의 열 끼리만 연산을 수행
+
+
+
+
+import seaborn as sns
+titanic=sns.load_dataset('titanic')
+df=titanic.loc[:,['age','fare']]
+print(df)
+print('-'*30)
+print(df*3)
+=>
+      age     fare
+0    22.0   7.2500
+1    38.0  71.2833
+2    26.0   7.9250
+3    35.0  53.1000
+4    35.0   8.0500
+..    ...      ...
+886  27.0  13.0000
+887  19.0  30.0000
+888   NaN  23.4500
+889  26.0  30.0000
+890  32.0   7.7500
+
+[891 rows x 2 columns]
+------------------------------
+       age      fare
+0     66.0   21.7500
+1    114.0  213.8499
+2     78.0   23.7750
+3    105.0  159.3000
+4    105.0   24.1500
+..     ...       ...
+886   81.0   39.0000
+887   57.0   90.0000
+888    NaN   70.3500
+889   78.0   90.0000
+890   96.0   23.2500
+
+[891 rows x 2 columns]
+
+
+
+import pandas as pd
+df1=pd.DataFrame({'a':[0,1,2],'b':[3,4,5]})
+df2=pd.DataFrame({'a':[0,1,2,3],'c':[6,7,8,9]})
+print(df1+df2)
+=>
+     a   b   c
+0  0.0 NaN NaN
+1  2.0 NaN NaN
+2  4.0 NaN NaN
+3  NaN NaN NaN
+----------------------------------------------------------------------------------------------------------------
+CSV (Comma-Separated Values text file) .csv	pandas.read_csv('파일이름')
+Excel (Microsoft)	                           .xlsx	pandas.read_excel('Excel파일이름')
+JSON			             .txt	pandas.read_json('JSON파일이름')
+					pandas.read_html('HTML파일이름'/'URL')
+
+
+read_csv('csv파일이름'[,sep=문자열(',')
+                              ,header=헤더의 행번호[0]
+                              ,index_col=행인덱스의 열번호
+                              ,names=[열이름1,...,열이름n]
+                              ,skiprows=[건너뛸 행갯수]
+		  ,parse_dates=True/False #날짜데이터를 datetime타입으로 변환할지 여부
+		  ,skip_footer=[맨아래 건너뛸 행갯수]
+		  ,encoding=[인코딩문자시스템명]
+)
+
+read_excel('excel파일이름' [,engine='openpyxl'  <-확장자:xlsx      conda install openpyxl 설치필요
+                                                 'xlrd'         <-확장자:xls       conda install xlrd 설치필요
+		         ,header=None
+)
+
+read_html('html파일이름/url')    conda install html5lib 설치필요
+			 conda install lxml 설치필요		         
+
+.find => 못찾으면 -1
+.index => 못찾으면 AttributeError
+
+
+
+
+file_path='C:/Users/h/Desktop/pandas sample/part2/read_csv_sample.csv'
+df=pd.read_csv(file_path)
+print(df)
+=>
+   c0  c1  c2  c3
+0   0   1   4   7
+1   1   2   5   8
+2   2   3   6   9
+
+
+print(df.size)
+=>
+12
+
+
+df=pd.read_csv(file_path,index_col=0)
+print(df.size)
+print(df)
+=>
+9
+    c1  c2  c3
+c0            
+0    1   4   7
+1    2   5   8
+2    3   6   9
+
+
+df=pd.read_csv(file_path,index_col=0, names=['A','B','C','D'])
+print(df.size)
+print(df)
+=>
+12
+     B   C   D
+A             
+c0  c1  c2  c3
+0    1   4   7
+1    2   5   8
+2    3   6   9
+
+
+
+df=pd.read_csv(file_path,header=0)
+print(df.size)
+print(df)
+=>
+12
+   c0  c1  c2  c3
+0   0   1   4   7
+1   1   2   5   8
+2   2   3   6   9
+
+
+
+
+file_path='C:/Users/h/Desktop/pandas sample/part2/남북한발전전력량.xlsx'
+df1=pd.read_excel(file_path,engine='openpyxl')
+df2=pd.read_excel(file_path,engine='openpyxl',header=None)
+print(df1)
+print('-'*30)
+print(df2)
+=>
+  전력량 (억㎾h) 발전 전력별  1990  1991  1992  1993  1994  1995  1996  1997  ...  2007  \
+0        남한     합계  1077  1186  1310  1444  1650  1847  2055  2244  ...  4031   
+1       NaN     수력    64    51    49    60    41    55    52    54  ...    50   
+2       NaN     화력   484   573   696   803  1022  1122  1264  1420  ...  2551   
+3       NaN    원자력   529   563   565   581   587   670   739   771  ...  1429   
+4       NaN    신재생     -     -     -     -     -     -     -     -  ...     -   
+5        북한     합계   277   263   247   221   231   230   213   193  ...   236   
+6       NaN     수력   156   150   142   133   138   142   125   107  ...   133   
+7       NaN     화력   121   113   105    88    93    88    88    86  ...   103   
+8       NaN    원자력     -     -     -     -     -     -     -     -  ...     -   
+
+   2008  2009  2010  2011  2012  2013  2014  2015  2016  
+0  4224  4336  4747  4969  5096  5171  5220  5281  5404  
+1    56    56    65    78    77    84    78    58    66  
+
+
+
+file_path='C:/Users/h/Desktop/pandas sample/part2/read_json_sample.json'
+df=pd.read_json(file_path)
+print(df.size)
+print(df)
+=>
+12
+           name  year        developer opensource
+pandas           2008    Wes Mckinneye       True
+NumPy            2006  Travis Oliphant       True
+matplotlib       2003   John D. Hunter       True
+
+
+
+import html5lib
+file_path='C:/Users/h/Desktop/pandas sample/part2/sample.html'
+df=pd.read_html(file_path)
+print(df)
+=>
+[   Unnamed: 0  c0  c1  c2  c3
+0           0   0   1   4   7
+1           1   1   2   5   8
+2           2   2   3   6   9,          name  year        developer  opensource
+0       NumPy  2006  Travis Oliphant        True
+1  matplotlib  2003   John D. Hunter        True
+2      pandas  2008    Wes Mckinneye        True]
+
+
+
+
+import html5lib
+file_path='C:/Users/h/Desktop/pandas sample/part2/sample.html'
+df=pd.read_html(file_path)
+for i in range(len(df)):
+    print(df[i])
+    print('-'*30)
+=>
+   Unnamed: 0  c0  c1  c2  c3
+0           0   0   1   4   7
+1           1   1   2   5   8
+2           2   2   3   6   9
+------------------------------
+         name  year        developer  opensource
+0       NumPy  2006  Travis Oliphant        True
+1  matplotlib  2003   John D. Hunter        True
+2      pandas  2008    Wes Mckinneye        True
+------------------------------
+
+
+
+
+
+
+
+from bs4 import BeautifulSoup
+import requests
+import re
+import pandas as pd
+
+url="https://en.wikipedia.org/wiki/List_of_American_exchange-traded_funds"
+resp=requests.get(url)
+soup=BeautifulSoup(resp.text,'lxml')
+rows=soup.select('div > ul > li')
+
+etfs={}
+for row in rows:
+    
+    try:
+        str=row.text
+        ndx=str.find('(')
+        etf_name=str[:ndx]
+        etf_name=etf_name.strip()
+        print(str)
+        print(f'etf_name[{etf_name}]')
+        
+        
+        ndx1=str.index(':')
+        etf_market=str[ndx+1:ndx1]
+        etf_market=etf_market.strip()
+        print(f'etf_market[{etf_name}]')
+        
+        ndx2=str.index(')')
+        etf_ticker=str[ndx1+1:ndx2]
+        etf_ticker=etf_ticker.strip()
+        print(f'etf_ticker[{etf_name}]')
+        print('-'*30)
+        etfs[etf_ticker]=[etf_market, etf_name]
+                
+    except ValueError as err:
+        pass
+    
+print(etfs)
+print('-'*30)
+
+df=pd.DataFrame(etfs)
+print(df)
+
+
+
+
+
+
+from bs4 import BeautifulSoup
+import requests
+import re
+import pandas as pd
+
+url="https://en.wikipedia.org/wiki/List_of_American_exchange-traded_funds"
+resp=requests.get(url)
+soup=BeautifulSoup(resp.text,'lxml')
+rows=soup.select('div > ul > li')
+
+etfs={}
+for row in rows:
+    try:
+        str=row.text
+        ndx=str.find('(')
+        if ndx<0: 
+            continue
+            
+        etf_name=str[:ndx]
+        etf_name=etf_name.strip()
+        print(str)
+        print(f'etf_name[{etf_name}]')
+        
+        
+        ndx1=str.find(':',ndx)
+        if ndx1>-1:
+            etf_market=str[ndx+1:ndx1]
+            etf_market=etf_market.strip()
+            print(f'etf_market[{etf_market}]')
+
+            
+            ndx2=str.find(')')
+            if ndx2<0:
+                continue
+            etf_ticker=str[ndx1+1:ndx2]
+            etf_ticker=etf_ticker.strip()
+            print(f'etf_ticker[{etf_ticker}]')
+        else:
+            ndx2=str.index(')')
+            str=str[ndx+1:ndx2]
+            ndx1=str.rfind(' ')
+#             print(f'str[{str}] ndx[{ndx}]ndx1[{ndx1}]')
+           
+            if ndx1>-1:
+                etf_market=str[:ndx1]
+                print(f'etf_market[{etf_market}]')
+                    
+              
+                etf_ticker=str[ndx1+1:]
+                etf_ticker=etf_ticker.strip()
+                print(f'etf_ticker[{etf_ticker}]')
+       
+        etfs[etf_ticker]=[etf_market, etf_name]
+                
+    except ValueError as err:
+        print(str(err))
+print(etfs)
+print('-'*30)
+
+df=pd.DataFrame(etfs)
+print(df)
+-----------------------------------------------------------------------------------------------------------
+데이터 저장하기
+
+.to csv('csv파일이름')
+.to_json('json파일이름')
+.to_excel('excel파일이름')
+-----------------------------------------------------------------------------------------------------------
+판다스 내장 그래프 도구 활용
+
+import pandas as pd
+
+df=pd.read_excel('C:/Users/h/Desktop/pandas sample/part2/남북한발전전력량.xlsx',engine='openpyxl')
+df_ns=df.iloc[[0,5],3:]
+df_ns.index=['South','North']
+df_ns.columns=df_ns.columns.map(int)
+df_ns.plot()
+
+
+
+
+import pandas as pd
+
+df=pd.read_excel('C:/Users/h/Desktop/pandas sample/part2/남북한발전전력량.xlsx',engine='openpyxl')
+df_ns=df.iloc[[0,5],3:]
+df_ns.index=['South','North']
+df_ns.columns=df_ns.columns.map(int)
+tdf_ns=df_ns.T
+tdf_ns.plot()
+
+
+import pandas as pd
+
+df=pd.read_excel('C:/Users/h/Desktop/pandas sample/part2/남북한발전전력량.xlsx',engine='openpyxl')
+df_ns=df.iloc[[0,5],3:]
+df_ns.index=['South','North']
+df_ns.columns=df_ns.columns.map(int)
+tdf_ns=df_ns.T
+tdf_ns.plot(kind='bar')
+
+
+
+
+
+import pandas as pd
+
+df=pd.read_excel('C:/Users/h/Desktop/pandas sample/part2/남북한발전전력량.xlsx',engine='openpyxl')
+df_ns=df.iloc[[0,5],3:]
+df_ns.index=['South','North']
+df_ns.columns=df_ns.columns.map(int)
+tdf_ns=df_ns.T
+tdf_ns.plot(kind='hist')
+
+
+
+
+df=pd.read_csv("C:/Users/h/Desktop/pandas sample/part3/auto-mpg.csv",header=None)
+df.columns=['mpg','cylinders','displacement','horsepower','weight','acceleration','model year','origin','name']
+
+df.plot(x='weight',y='mpg',kind='scatter')
+
+
+
+
+df=pd.read_csv("C:/Users/h/Desktop/pandas sample/part3/auto-mpg.csv",header=None)
+df.columns=['mpg','cylinders','displacement','horsepower','weight','acceleration','model year','origin','name']
+df[['mpg','cylinders']].plot(kind='box')
+
+
+---------------------------------------------------------------------------------------------------------------
+시각화도구
+
+from matplotlib import font_manager, rc
+font_path = "C:/Users/h/Desktop/pandas sample/part4/malgun.ttf"
+font_name = font_manager.FontProperties(fname=font_path).get_name()
+rc('font',family=font_name)
+
+import matplotlib.pyplot as plt
+df=pd.read_excel('C:/Users/h/Desktop/pandas sample/part4/시도별 전출입 인구수.xlsx',engine='openpyxl',header=0)
+
+df=df.fillna(method='ffill')
+
+mask=(df['전출지별']=='서울특별시') & (df['전입지별'] != '서울특별시')
+df_seoul=df[mask]
+df_seoul=df_seoul.drop(['전출지별'], axis=1)
+df_seoul.rename({'전입지별':'전입지'},axis=1, inplace=True)
+df_seoul.set_index('전입지', inplace=True)
+
+sr_one = df_seoul.loc['경기도']
+
+plt.plot(sr_one.index,sr_one.values)
+
+plt.title('서울->경기 인구 이동')
+
+plt.xlabel('기간')
+plt.ylabel('이동 인구수')
+
+plt.show()
+
+
+
+
+
+
+plt.style.use('classic')
+
+df=pd.read_csv('C:/Users/h/Desktop/pandas sample/part3/auto-mpg.csv', header=None)
+
+df.columns=['mpg','cylinders','displacement','horsepower','weight','acceleration','model year','origin','name']
+
+df['mpg'].plot(kind='hist',bins=10,color='coral',figsize=(10,5))
+
+plt.title('Histogram')
+plt.xlabel('mpg')
+plt.show()
+
+
+
+
+
+plt.style.use('default')
+
+df=pd.read_csv('C:/Users/h/Desktop/pandas sample/part3/auto-mpg.csv', header=None)
+
+df.columns=['mpg','cylinders','displacement','horsepower','weight','acceleration','model year','origin','name']
+
+# df['mpg'].plot(kind='hist',bins=10,color='coral',figsize=(10,5))
+df.plot(kind='scatter',x='weight',y='mpg',c='cyan',s=10,figsize=(10,5))
+
+plt.title('Scatter Plot - mpg vs weight')
+# plt.xlabel('mpg')
+plt.show()
+

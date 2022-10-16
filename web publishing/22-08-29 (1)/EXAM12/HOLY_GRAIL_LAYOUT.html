@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #container{
+            display : flex;
+            flex-direction: column;
+        }
+        header{
+           border-bottom: 1px solid gray;
+           padding-left: 20px; 
+        }
+        footer {
+            border-top: 1px solid gray;
+            padding-left: 20px; 
+        }
+        .content{
+            display : flex;
+            flex-direction: row;
+        }
+        .content nav {
+            border-right: 1px solid gray;
+        }
+        .content aside {
+            border-left: 1px solid gray;
+        }
+        main {
+            padding : 10px;
+        }
+        nav, aside {
+            flex-basis : 150px;
+            flex-shrink: 0;
+        }
+
+    </style>
+</head>
+<body>
+    <div id="container">
+        <header>
+            <h1> 휴먼교육센터</h1>
+        </header>
+        <section class="content">
+            <nav>
+                <ul>
+                    <li>학원소개</li>
+                    <li>과정소개</li>
+                    <li>게시판</li>
+                </ul>
+            </nav>
+            <main>
+                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Velit illum veniam aut fuga repudiandae eius iusto minima. Saepe, mollitia. Eligendi nobis dignissimos animi ut odit fugit in beatae laboriosam nulla!
+                Aut ex earum neque magni minima, officiis aperiam quaerat nisi similique corrupti perspiciatis velit, debitis at fugit ad amet enim. Labore officia eligendi sequi dicta fuga earum, debitis perferendis dolore.
+                Necessitatibus commodi, reprehenderit quisquam quod consequuntur fugit delectus eius harum vel laudantium corrupti sit repudiandae itaque laboriosam nesciunt dolorum sunt obcaecati earum, tempora nisi quos ducimus est possimus. Nobis, blanditiis.
+            </main>
+            <aside>
+                AD        
+            </aside>
+        </section>
+        <footer>
+            <a href="www.human.or.kr">학원 홈페이지</a>
+        </footer>
+    </div>
+    
+</body>
+</html>

@@ -1,0 +1,472 @@
+숫자함수
+
+abs절댓값
+
+select abs(-3.14) from dual;  =>결과 3.14
+select * from employees where abs(salary)>3000 => 샐러리의 절대값이 3천보다 큰 사람 찾기
+
+--------------------------------------------------------------------------------------------------------------
+
+
+celi() : 큰 숫자 중 가장 작은 정수 찾기
+
+ceil(3.14)  => 4
+
+floor() : 작은 숫자 중 가장 큰 정수 찾기
+
+floor(3.14) => 3
+--------------------------------------------------------------------------------------------------------------
+
+power(): 거듭제곱
+
+ex) power(2,3) => 2*2*2
+
+sqrt(): 제곱근
+
+ex) sqrt(16) => 4
+
+mod()/remainder() : 나머지
+
+select mod(19,4),remainder(19,4) from dual;    =>모드는 제대로 나머지가 3이 나오지만
+리메인더는 통상적으로 쓰이는 나머지가 안구해져서 잘 안씀
+
+log(10,100) => 2
+--------------------------------------------------------------------------------------------------------------
+
+initcap
+
+select initcap('park jae hyung') from dual; => 앞글자를 대문자로
+select lower('pARk jae hyung') from dual; => 전부  소문자로
+select upper('pARk jae hyung') from dual => 전부 대문자로
+
+concat => concatenation(문자열 연결) == ||  (mysql에서는 +)
+
+select concat(concat('Good ','Morning'), ' Vietnam') from dual; 이렇게쓰지말고
+select 'Good '||'Morning '||'Vietnam' from dual; 이거쓸것
+
+
+substr => substring(부분문자열)
+
+substr(문자열/컬럼명,시작인덱스,[길이])
+
+select substr('Good Morning',1,4) from dual; => 'Good' 출력 여기서 4를 생략하면 끝까지 출력
+
+select substr('Good Morning',-7) from dual; => 오른쪽부터 -1 -2 -3... 해서 Morning만 출력
+
+select substr(emp_name,1,5) from employees; 전체직원들의 이름을 앞에서 5글자까지만 출력
+
+
+instr :어떤문자열이 어디서부터 (인덱스) 나타나는지 찾기 , 못찾으면 0나옴
+ex) select instr('Good Morning','Morning') from dual=> 6
+
+select emp_name,instr(emp_name,' ')from employees;  => 직원들이름중 공백있는부분이 몇번째인덱스인지 모두 출력
+
+select emp_name, substr(emp_name,1,instr(emp_name,' ')-1) from employees; 
+
+=> instr  와 substr를 활용해서 직원들의 이름만 추출하기
+
+select emp_name, substr(emp_name,instr(emp_name,' ')+1) from employees;
+
+=> instr  와 substr를 활용해서 직원들의 성만 추출하기
+--------------------------------------------------------------------------------------------------------------
+
+select ltrim('          world        ')from dual; =>왼쪽공백이 다 짤림
+select rtrim('          world        ')from dual; =>오른쪽공백이 다 짤림
+select trim('          world        ')from dual; =>공백이 다 짤림
+
+--------------------------------------------------------------------------------------------------------------
+replace : 문자열에서 부분문자열을 다른 문자열로 대치한다.
+
+replace(문자열,대상문자열,목표문자열)
+
+select replace('Good Morning','Morning','Evening')from dual;  =>굿모닝이 굿이브닝으로 변경되어 출력
+
+select replace(phone_number,'.','-')from employees; =>전화번호에서 .를 -로 대치에서 출력
+
+substr,instr,replace ,|| 이 네개가 제일 많이 쓰임
+--------------------------------------------------------------------------------------------------------------
+length :문자열 길이구하기
+
+length(문자열/컬럼명)
+
+select emp_name,length(emp_name)from employees;
+=>직원 이름 길이 출력
+
+select length('홍길동'),lengthb('홍길동')from dual;    => length는 3나오고 lengthb는 bite기때문에 6나옴
+--------------------------------------------------------------------------------------------------------------
+lpad/rpad(문자열/컬럼명,전체길이,채울문자열)
+
+select lpad('World',20,' ')from dual; => 20칸중에 world 5칸 빼고 왼쪽 15개 전부 공백으로채움
+select rpad('World',20,'9')from dual; => 20칸중에 world 5칸 빼고 오른쪽 15개 전부 공백으로채움
+
+--------------------------------------------------------------------------------------------------------------
+
+sysdate - 오늘날짜
+systimestamp -현재시각
+
+select sysdate,systimestamp from dual;
+
+--------------------------------------------------------------------------------------------------------------
+to_char(숫자/날짜) =>문자열로 출력
+
+select to_char(sysdate,'YYYY-MM-DD')from dual; => 2022-09-08
+select to_char(sysdate,'YY.MM.DD')from dual; =>22.09.08
+select to_char(systimestamp,'YYYY-MM-DD HH:MI:SS')from dual; => 2022-09-08 11:23:10
+
+to_number(문자열) =>숫자로 출력
+
+select to_number('1234')from dual;  => 1234
+--------------------------------------------------------------------------------------------------------------
+NVL(칼럼명,칼럼과 같은타입의 값) : 칼럼값이 null아니면, 그 칼럼값 출력
+		 칼럼값이 null이면 대신 입력한 값을 출력
+
+select emp_name,nvl(manager_id,0)from employees; 사장만 null이므로 0으로 변환되어 출력
+
+NVL2(칼럼명,값1,값2): 칼럼값이 null이면 값1출력
+		  칼럼값이 null아니면 값2출력
+
+select emp_name,manager_id,NVL2(manager_id,1,0)from employees; 
+매니저아이디가 null이면 0찍고 아니면 1 출력
+
+--------------------------------------------------------------------------------------------------------------
+coalesce(매개변수들) : 왼쪽 매개변수부터 검사해서
+		   null이 아닌 최초의 매개변수만 출력			
+
+select salary,commission_pct, coalesce ((commission_pct+1)*salary,salary) from employees;
+--------------------------------------------------------------------------------------------------------------
+lnnvl
+select to_char (commission_pct,'9.99')from employees where lnnvl(commission_pct>=0.2);
+
+nullif(값1,값2) : 값1 == 값2 이면 null출력
+	     값1 <> 값2 이면 값1출력
+nvl (nullif(값1,값2),'-')
+
+ifnull(값1,값2) <- Mysql
+
+
+--------------------------------------------------------------------------------------------------------------
+
+decode(칼럼명/표현식, 값1,출력1,값2,출력2,...,값n,출력n)
+
+select decode(channel_id,3,'direct',2,'partners',4,'internet',5,'Catalog',9,'telesale') from sales;
+--------------------------------------------------------------------------------------------------------------
+기본 집계함수 count sum min max variance stddev
+
+count() -  레코드 개수 세기  count(칼럼명) 할때 값이 null인 칼럼은 포함되지 않는다.
+select count(*) from sales;
+select count(*) from employees;
+select count(*)from products;
+select count(*)from channels;
+
+
+sum(숫자타입 칼럼명) - 합계구하기
+select sum(salary)from employees;
+
+
+avg()- 평균구하기
+select avg(salary)from employees;
+select to_char(avg(salary),'9999.99')from employees;
+
+
+min()/max()-최소/최대값
+select min(salary),max(salary)from employees;
+
+
+variance()/stddev()-분산도/표준편차
+
+distinct : 대표값만 표시, ()가 없다.
+select distinct salary from employees;
+
+order by 컬럼명1,....,컬럼명n   : 오름차순 정렬(A~Z,a-z,0-9)
+order by 컬럼명1,....,컬럼명n desc   : 내림차순 정렬(Z~A,z-a,9-0)
+
+desc=>descendent
+asc  =>ascendant
+
+select emp_name from employees order by emp_name;
+A부터 오름차순 정렬
+select emp_name from employees order by emp_name desc;
+내림차순 정렬
+select salary,emp_name from employees order by salary,emp_name;
+샐러리에서 정렬하고 같은 샐러리 내에서 이름을 또 정렬
+--------------------------------------------------------------------------------------------------------------
+group by :특정 값을 가진 컬럼 끼리 묶는다. 집계함수(count, sum, avg, min, max, variance, stddev)
+	와 반드시 같이 써야한다. 
+
+select job_id,count(*) from employees group by job_id;
+
+select job_id,sum(salary) from employees group by job_id;
+
+select manager_id,count(*) from employees group by manager_id;
+매니저사번별 부하직원 숫자 조회
+
+select salary,count(*) from employees group by salary order by salary desc;
+월급별 직원숫자 조회+내림차순
+
+select department_id,sum(salary) from employees group by department_id order by department_id;
+부서코드별 월급합계
+
+
+having : group by의 결과에 조건을 추가(집계함수에 대한 조건)
+
+select manager_id,count(*) from employees group by manager_id having count(*)>1;
+매니저사번별 부하직원 숫자 조회한거에서 2명 이상 부하직원이 있는경우만 조회
+
+select manager_id,count(*) from employees group by manager_id having count(*)=8;
+부하 8명있는 매니저사번만 조회
+--------------------------------------------------------------------------------------------------------------
+집합연산자
+
+
+
+create table exp_goods (
+country varchar2(10),seq number,goods varchar2(80)
+);
+insert into exp_goods values('한국',1,'원유제외석유류');
+insert into exp_goods values('한국',2,'자동차');
+insert into exp_goods values('한국',3,'전자집적회로');
+insert into exp_goods values('한국',4,'선박');
+insert into exp_goods values('한국',5,'LCD');
+insert into exp_goods values('한국',6,'자동차부품');
+insert into exp_goods values('한국',7,'휴대전화');
+insert into exp_goods values('한국',8,'환식탄화수소');
+insert into exp_goods values('한국',9,'무선송신기디스플레이부속품');
+insert into exp_goods values('한국',10,'철또는비합금강');
+select * from exp_goods;
+
+create table exp_goods_japan (
+country varchar2(10),seq number,goods varchar2(80)
+);
+insert into exp_goods_japan values('일본',1,'자동차');
+insert into exp_goods_japan values('일본',2,'자동차부품');
+insert into exp_goods_japan values('일본',3,'전자집적회로');
+insert into exp_goods_japan values('일본',4,'선박');
+insert into exp_goods_japan values('일본',5,'반도체웨이퍼');
+insert into exp_goods_japan values('일본',6,'화물차');
+insert into exp_goods_japan values('일본',7,'원유제외석유류');
+insert into exp_goods_japan values('일본',8,'건설기계');
+insert into exp_goods_japan values('일본',9,'다이오드트랜지스터');
+insert into exp_goods_japan values('일본',10,'기계류');
+select * from exp_goods_japan;
+
+
+※ 데이터 타입이 같은 컬럼끼지만 집합연산자가 적용된다
+
+union 합집합 - 공통원소는 한번만 표시 
+ex) select goods from exp_goods union select goods from exp_goods_japan;
+     select goods from exp_goods union all select goods from exp_goods_japan; 
+     union all 은 공통원소 모두 표시
+
+intersect 교집합
+
+ex) select goods from exp_goods intersect select goods from exp_goods_japan;
+
+
+minus 차집합
+ex) select goods from exp_goods minus select goods from exp_goods_japan;
+
+     =>exp_goods(한국)에서 exp_goods_japan(일본)을 뺌
+  
+    select goods from exp_goods_japan minus select goods from exp_goods;
+
+    => 반대로 일본에서 한국꺼를 뺌
+
+
+     select goods from exp_goods_japan minus select goods from exp_goods order by goods;
+--------------------------------------------------------------------------------------------------------------
+기본키(Primary Key):null이 없고 unique한 중복되는 값이 없는 키(휴대전화번호나 주민번호같은거)
+외래키(Foreign Key):다른테이블에서 기본키로 사용되고있는 키가 어떠한 다른 테이블에서 검색용키로
+		사용되고있을때 그 키를 외래키라고 함
+
+
+
+
+조인 join : 2개 이상의 table을 where조건으로 연계, 새로운 검색 결과를 출력.
+
+※ img1참고
+
+Catasian Join => where조건없이 조인
+select a.name,a.mobile,b.phone,b.area
+from A, B
+
+이렇게 조인하면 의미없는 데이터도 같이 추출됨
+
+
+
+select a.name,a.mobile,b.phone,b.area
+from A, B
+where A.mobile=B.phone
+이렇게 where 까지 넣고 조인해야 의미있는 데이터가 추출
+
+
+Nomalization :테이블 분리=>작업량 감소의 효과가있음(insert/update/delete)
+
+내부조인(inner join) :
+		동등조인(equi) : = 사용해 조인
+
+      select employee_id, emp_name,department_id from employees;
+
+      select department_id, department_name from departments;
+ 
+      select employees.employee_id,employees.emp_name,departments.department_name,
+      employees.department_id
+      from employees, departments
+      where employees.department_id=departments.department_id; 이렇게 하면 너무 기니까
+
+      더 간단하게 쓰려면 이렇게하면된다.
+      select a.employee_id,a.emp_name,b.department_name,
+      a.department_id
+      from employees a, departments b
+      where a.department_id=b.department_id;
+
+      select employees.employee_id,employees.emp_name,jobs.job_title
+      from employees, jobs
+      where employees.job_id=jobs.job_id;
+      사번, 이름, 직위명
+
+      select a.employee_id,a.emp_name,b.job_title
+      from employees a, jobs b
+      where a.job_id=b.job_id;
+      간단히쓰기
+
+      select a.employee_id,a.emp_name,b.job_title, C.department_name
+      from employees a, jobs b, departments C
+      where a.job_id=b.job_id and a.department_id=C.department_id;
+
+      위의 예제에서 departments 테이블의 department_id도 추가 조인하기(and로 묶어줄것)
+
+
+     select * from sales;
+     select * from products;
+     select * from customers;
+     select * from channels;
+     select * from employees;
+     이 다섯개의 테이블에서(sales가 기준)
+
+select B.prod_name,C.cust_name,D.channel_desc, E.emp_name
+ from sales A, products b, customers C, channels D, employees E
+ where A.prod_id=B.prod_id and A.cust_id=C.cust_id and A.channel_id=D.channel_id
+ and A.employee_id=E.employee_id;
+
+제품명,고객명,판매방식,판매직원,판매일자 묶어서 조인하기
+
+
+		세미조인(semi) : <,> 사용해 조인
+
+ select * from departments;
+ select * from employees;
+
+ select a.department_id, a.department_name
+ from departments a, employees b
+ where a.department_id=b.department_id and b.salary>3000
+ order by a.department_name;
+
+		안티조인(anti) : != 사용해 조인(동등조인이랑 반대)
+
+		셀프조인(self) : from부분에 같은테이블을 두번 조인 ex) from A, A
+
+ select a.employee_id, a.emp_name, b.emp_name manager_name
+ from employees a, employees b
+ where A.manager_id=B.employee_id;
+a의 manager_id로 b의 employ_id를 셀프조인하여 emp_name중 매니저를 조회
+
+ select a.department_id, a.department_name, b.department_name parent_department
+ from departments a, departments b
+ where A.parent_id=B.department_id;    
+셀프조인으로 상위부서명 조회
+
+--------------------------------------------------------------------------------------------------------------
+외부조인(outer join) :
+
+		-left outer join-
+
+ create table a(
+ c1 varchar2(4),c2 varchar2(4));
+ create table b(
+ c3 varchar2(4),c4 varchar2(4));
+ insert into a values('1','a');
+ insert into a values('2','b');
+ insert into a values('3','c');
+ insert into a values('4','d');
+ insert into a values('5','e');
+            
+ insert into b values('a','x1');
+ insert into b values('c','y1');         
+ insert into b values('e','y2');
+ insert into b values('a','x2');
+ insert into b values('c','y3');
+먼저 테이블 생성하고 값 넣은것
+
+ select * from a,b where a.c2=b.c3(+);    
+(+)를 붙여주면 내부조인에서 조회안되던 null값도 같이 확인할 수 있다.
+
+mySQL에서는 
+select * 
+from a left outer join b
+on a.c2=b.c3;
+이렇게 (+)를 안쓴다 (ANSI style)
+ 
+
+ select a.employee_id, a.emp_name, b.emp_name manager_name
+ from employees a, employees b
+ where A.manager_id=B.employee_id(+);
+위에 매니저 확인하는 예제에서 스티븐킹만 매니저아이디가 null이라 조회가 안되었는데 (+)붙여주면
+같이 조회가 됨
+
+		-right outer join-
+
+(+)를 왼쪽으로 옮기면 right outer join
+  select * 
+  from a,b
+  where a.c2(+)=b.c3;
+  select * 
+  from b,a
+  where b.c3=a.c2(+);
+
+=>둘다똑같음
+
+ansi스타일은
+select * 
+  from a right outer join b
+ on a.c2=b.c3;
+
+select * 
+  from b right outer join a
+ on b.c3=a.c2;
+
+
+
+
+		-full outer join-
+
+  select * 
+  from a,b
+ where a.c2(+)=b.c3(+);  => 이렇게 못쓰고 ansi로만 쓸수있다.
+
+ansi 스타일은
+  select * 
+  from a full outer join b
+ on a.c2=b.c3;
+
+
+select b.emp_name manager_name, count(*)
+ from employees a,employees b
+ where a.manager_id=b.employee_id
+ group by b.emp_name
+ order by b.emp_name;
+매니저사번 -> 매니저명, 소속직원 숫자(셀프조인 사용)
+
+ select b.department_name,count(*)
+from employees a, departments b
+where a.department_id=b.department_id
+group by b.department_name
+order by b.department_name;
+부서코드->부서명, 소속직원숫자(동등조인 사용)
+
+ select a.employee_id, a.emp_name, a.salary, b.department_name
+ from employees a, departments b
+ where a.department_id=b.department_id
+and a.salary between 5000 and 10000;     /*    a.salary>=5000 and a.salary <=10000   */
+ 월급이 5000~10000불 사이인 직원의 직원의 사번 이름 월급 부서명(세미조인활용)
+
+

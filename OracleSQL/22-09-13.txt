@@ -1,0 +1,89 @@
+* asterisk (star)
+{} brace
+<>arrow bracket(홑화살괄호)
+[]bracket
+~wave
+'
+"
+.
+_underscore, underbar
+-dash,hyphen
+#sharp
+&ampersand
+^accent, agui
+--------------------------------------------------------------------------------------------------------------
+
+select 일반서브쿼리
+from 인라인 뷰
+where (select * from~) 중첩쿼리
+
+서브쿼리: 위처럼 sql문 안에 하나이상의 sql문이 들어있는경우를 sub-query라고 한다
+select 옆에 있으면 일반서브쿼리 from옆에면 인라인 뷰 where 옆이면 중첩쿼리
+
+
+ select a.employee_id, a.emp_name, a.salary, b.department_name
+ from employees a, departments b
+ where a.department_id=b.department_id
+and a.salary between 5000 and 10000;     
+이거를
+
+select a.employee_id,a.emp_name,a.salary,b.department_name 
+from (select * from employees where salary between 5000 and 10000) a,
+     departments b
+where a.department_id=b.department_id;
+이런식으로 테이블a를 먼저 5000~10000사이의값으로 잘라주면 sql문이 더 빨라짐
+
+--------------------------------------------------------------------------------------------------------------
+select count(*)
+from employees
+where salary>=(select avg(salary) from employees);
+중첩쿼리로 전 사원의 평균 급여 이상을 받는 사원수를 조회
+
+--------------------------------------------------------------------------------------------------------------
+select count(*)
+from employees
+where department_id in(select department_id 
+                       from departments 
+                       where parent_id is null);
+
+parent_id가 null인 부서번호를 가진 사원의 총 숫자
+--------------------------------------------------------------------------------------------------------------
+ update employees
+ set salary =(select avg(salary) from employees);
+모든사원의 급여를 평균 금액으로 갱신
+--------------------------------------------------------------------------------------------------------------
+delete from employees
+where salary<=(select avg(salary) from employees);
+평균 급여보다 많이 받는 사원 삭제
+--------------------------------------------------------------------------------------------------------------
+
+select employee_id, emp_name, job_id
+from employees
+where(employee_id,job_id)in (select employee_id,job_id from job_history);
+
+employees의 employee_id,job_id와  job_history의 employee_id,job_id가 일치하는것만 출력
+
+
+
+/*제품별 매출액 합계->제품명,매출액 합계*/
+select b.prod_name, sum(a.amount_sold)
+from sales a, products b
+where a.prod_id=b.prod_id
+group by b.prod_name
+order by sum(a.amount_sold)desc;
+
+
+/*고객별 매출액 합계 ->고객명, 매출액 합계 */
+select b.cust_name, sum(a.amount_sold) total
+from sales a, customers b
+where a.cust_id=b.cust_id
+group by b.cust_name
+order by total desc;
+
+
+/*상위부서가 없는 부서에 속한 직원의 명단, 부서명
+이름1 부서명
+이름2 부서명 */
+ select a.emp_name, b.department_name
+from employees a, (select * from departments where parent_id is null) b
+where a.department_id=b.department_id;
