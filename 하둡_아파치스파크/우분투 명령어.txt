@@ -1,0 +1,40 @@
+파워쉘 명령어 
+ wsl -l -v : 우분투 버젼 확인
+
+
+우분투 명령어 
+ pwd  현재경로 
+
+
+export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
+export SPARK_HOME=/home/human/spark-3.3.1-bin-hadoop3
+export PATH=$JAVA_HOME/bin:$PATH
+export PATH=$SPARK_HOME/bin:$PATH
+export PYSPARK_PYTHON=/usr/bin/python3.8
+export PYSPARK_DRIVER_PYTHON=jupyter
+export PYSPARK_DRIVER_PYTHON_OPTS='notebook'
+
+vi ~/.bashrc    => E 
+
+esc -> :wq! 
+
+
+mkdir pyspark_ml
+
+
+pip3 install numpy pandas matplotlib seaborn jupyterlab pyspark==3.3.1
+
+
+'argon2:$argon2id$v=19$m=10240,t=10,p=8$IatkRCZGZlB4yl/o0eSolA$2Ld8QUshtctWqa/I4p61yRSUNeo1UyyJyoQg2/6zCHA'
+
+
+jupyter notebook --generate-config
+sudo vi /home/human/.jupyter/jupyter_notebook_config.py
+
+퍼런화면 무시하고 
+
+ insert모드 진입후 상단에다가
+
+
+47 :  여기까지왔으면 주소창가서 localhost:8888 입력 후  48까지 왔으면 성공
+
