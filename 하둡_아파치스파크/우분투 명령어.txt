@@ -5,9 +5,24 @@
 우분투 명령어 
  pwd  현재경로 
 
+dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
+dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
+
+wsl --set-default-version 2
+
+sudo apt-get install -y openjdk-8-jdk
+
+sudo wget https://archive.apache.org/dist/spark/spark-3.2.0/spark-3.2.0-bin-hadoop3.2.tgz
+
+sudo tar -xvzf spark-3.2.0-bin-hadoop3.2.tgz
+
+sudo apt install python3.8
+
+sudo update-alternatives --install /usr/bin/python python /usr/bin/python3.8 1
+
 
 export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
-export SPARK_HOME=/home/human/spark-3.3.1-bin-hadoop3
+export SPARK_HOME=/home/human/spark-3.2.0-bin-hadoop3.2
 export PATH=$JAVA_HOME/bin:$PATH
 export PATH=$SPARK_HOME/bin:$PATH
 export PYSPARK_PYTHON=/usr/bin/python3.8
@@ -19,13 +34,19 @@ vi ~/.bashrc    => E
 esc -> :wq! 
 
 
+sudo apt install -y virtualenv
+
+sudo apt install python3-pip
+
+virtualenv --python=python3.8 venv
+
 mkdir pyspark_ml
 
 
-pip3 install numpy pandas matplotlib seaborn jupyterlab pyspark==3.3.1
+pip3 install numpy pandas matplotlib seaborn jupyterlab pyspark==3.2.0
 
 
-'argon2:$argon2id$v=19$m=10240,t=10,p=8$IatkRCZGZlB4yl/o0eSolA$2Ld8QUshtctWqa/I4p61yRSUNeo1UyyJyoQg2/6zCHA'
+'argon2:$argon2id$v=19$m=10240,t=10,p=8$heit77OrHOWea9zaL7J8yQ$ASfnR/JFKpkvOSHiQNMsGw87C9uMy4A3AlQgCcwIIm0'
 
 
 jupyter notebook --generate-config
@@ -34,6 +55,10 @@ sudo vi /home/human/.jupyter/jupyter_notebook_config.py
 퍼런화면 무시하고 
 
  insert모드 진입후 상단에다가
+c.NotebookApp.allow_origin = '*'
+c.NotebookApp.open_browser = False
+c.NotebookApp.password = 'argon2:$argon2id$v=19$m=10240,t=10,p=8$heit77OrHOWea9zaL7J8yQ$ASfnR/JFKpkvOSHiQNMsGw87C9uMy4A3AlQgCcwIIm0'
+
 
 
 47 :  여기까지왔으면 주소창가서 localhost:8888 입력 후  48까지 왔으면 성공
