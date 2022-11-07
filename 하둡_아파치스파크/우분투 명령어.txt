@@ -30,6 +30,7 @@ export PYSPARK_DRIVER_PYTHON=jupyter
 export PYSPARK_DRIVER_PYTHON_OPTS='notebook'
 
 vi ~/.bashrc    => E 
+source ~/.bashrc 
 
 esc -> :wq! 
 
@@ -46,7 +47,7 @@ mkdir pyspark_ml
 pip3 install numpy pandas matplotlib seaborn jupyterlab pyspark==3.2.0
 
 
-'argon2:$argon2id$v=19$m=10240,t=10,p=8$heit77OrHOWea9zaL7J8yQ$ASfnR/JFKpkvOSHiQNMsGw87C9uMy4A3AlQgCcwIIm0'
+'argon2:$argon2id$v=19$m=10240,t=10,p=8$2rtq/UGdxNXvG75USWR0fQ$3RCjUAMyAVVj/yfxoFgJuc+ftzyfmFp5suSzGwp7Weg'
 
 
 jupyter notebook --generate-config
