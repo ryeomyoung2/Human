@@ -65,3 +65,16 @@ c.NotebookApp.password = 'argon2:$argon2id$v=19$m=10240,t=10,p=8$heit77OrHOWea9z
 47 :  여기까지왔으면 주소창가서 localhost:8888 입력 후  48까지 왔으면 성공
 
 https://www.notion.so/PySpark-with-Jupyterlab-eb4e3517d73947359ccc9482ab1fb18f   참고
+
+
+
+
+
+
+
+cd wls2_pyspark/
+code .
+source venv/bin/activate
+
+
+pip3 install scikit-learn
