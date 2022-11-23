@@ -45,4 +45,5 @@
 - **내용**
   - 날로 증가하는 지하철 사건사고로 인해 출근길 대중교통을 이용하는 시민들의 스트레스를 덜어주기 위한 프로젝트
 - **사용 언어**: python
+- 폴더명: [human-cal-db-ryeom49](https://github.com/ryeomyoung2/human-cal-db-ryeom49)
 - [최종PDF](https://github.com/ryeomyoung2/temp221014/blob/main/%EC%A7%80%ED%95%98%EC%B2%A0%20%EA%B5%90%ED%86%B5%20%EB%8F%84%EC%9A%B0%EB%AF%B8%20%EC%B1%97%EB%B4%87%20%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8.pdf)
