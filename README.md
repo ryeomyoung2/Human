@@ -21,7 +21,7 @@
     - 사용툴: `OracleSQL`
     - 대용량의 Dataset을 활용하여 Data Handling 실습
     - 테이블 생성 및 select, insert, delete, join 등을 활용한 DB관리
-     __Python Numpy&Pandas__
+    __Python Numpy&Pandas__
     - 2022.09.19 ~ 2022.09.29
     - 사용툴: `jupyter notebook`
     - 산술연산자, 제어문, 반복문, list, Tuple, slicing, set, 파일입출력 학습
