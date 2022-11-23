@@ -7,34 +7,53 @@
 ## 내용 아카이빙
 
   - __JAVA__
-    - 2022.08.05 ~ 2022.09.06
+    - 2022.08.05 ~ 2022.08.26
     - 사용툴: `eclipse SE`
     - 
     - 
     - 
+    __Web Publishing__
+    - 2022.08.29 ~ 2022.09.02
+    - 사용툴: `vs code`
+    - Java Script, CSS, Jquery 활용하여 웹페이지 제작 실습
   - __SQL__
-    - 2022.09.06 ~ 2022.00.00
+    - 2022.09.06 ~ 2022.09.16
     - 사용툴: `OracleSQL`
     - 대용량의 Dataset을 활용하여 Data Handling 실습
     - 테이블 생성 및 select, insert, delete, join 등을 활용한 DB관리
+     __Python Numpy&Pandas__
+    - 2022.09.19 ~ 2022.09.29
+    - 사용툴: `jupyter notebook`
+    - 산술연산자, 제어문, 반복문, list, Tuple, slicing, set, 파일입출력 학습
+    - Series연산, beautifulsoup활용한 웹크롤링 학습
   - __Spring Boot__
-    - 2022.00.00 ~ 2022.10.14
+    - 2022.09.30 ~ 2022.10.7
     - 사용툴: `eclipse EE`
-    -
-    -
+    - Model, Form, Lombok, validation, jdbc 학습
+    - oracle 연동
+    - 간단한 게시판 제작 실습
+    - 회원가입 페이지 제작 실습
+    - 카페주문관리시스템 제작 실습
   - __MachineLearning & DeepLearning__
-    - 2022.10.17 ~ 2022.11.09
+    - 2022.10.17 ~ 2022.11.06
     - 사용툴: `Google Colab`,`PyTorch`
-    - KNN, 선형회귀, 다항회귀, 릿지회귀, 라쏘회귀, 로지스틱회귀 학습
-    - 의사결정나무 학습 && 교차검증, 그리드 서치 학습
-    - 랜덤 서치, 랜덤포레스트, 확률적 경사하강법, 그레디언트 부스팅 학습
+    - KNN, linear regression, polynomial regression 학습
+    - Ridge regression, Lasso regression, logistic regression 학습
+    - Decision Tree 학습 && 교차검증, 그리드 서치, 랜덤 서치 학습
+    - RandomForestClassifier, 확률적 경사하강법, 그레디언트 부스팅 학습
     - 이미지 데이터 불러와서 그레이스케일, 이진화, 모폴로지변환 , PCA 차원압축 학습
-    - 텐서보드를 이용한 모델 데이터 학습 시각화
+    - Tensorboard를 이용한 모델 데이터 학습 시각화
     - 합성곱 신경망, 심층신경망, CNN 학습
     - 전이학습, ResNet, Keras ImageDataGenerator 클래스 사용
     - Okt 활용하여 형태소 분석, 파이토치로 모델 만들어보기 
     - 데이터 정규화, 스탑워즈 학습
-    - 임베딩, 원핫 인코딩 학습
+    - embedding, One-hot 인코딩 학습
+  - __Apache Spark__
+    - 2022.11.07 ~ 2022.11.09
+    - 사용툴: `jupyter notebook`
+    - lambda 함수, RDD 학습
+    - PairRDD && PairRDD 메서드 종류 학습
+    - spark SQL, spark dataframe 학습
 
 ## Project
 
