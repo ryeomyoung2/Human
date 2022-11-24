@@ -39,7 +39,7 @@
     - 사용툴: `Google Colab`,`PyTorch`
     - KNN, linear regression, polynomial regression 학습
     - Ridge regression, Lasso regression, logistic regression 학습
-    - Decision Tree 학습 && 교차검증, 그리드 서치, 랜덤 서치 학습
+    - Decision Tree 학습 & 교차검증, 그리드 서치, 랜덤 서치 학습
     - RandomForestClassifier, 확률적 경사하강법, 그레디언트 부스팅 학습
     - 이미지 데이터 불러와서 그레이스케일, 이진화, 모폴로지변환 , PCA 차원압축 학습
     - Tensorboard를 이용한 모델 데이터 학습 시각화
