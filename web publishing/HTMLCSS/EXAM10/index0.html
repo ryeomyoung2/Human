@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div{
+            border : 1px solid gray;
+            margin : 10px;
+        }
+        #me{
+            /* static 생략가능 */
+            /* relative : 부모기준에서 위치지정 */
+            /* absolute : static인 부모까지 찾아가서 위치 지정 */
+            position: absolute; /* static / relative / absolute / fixed */
+            left : 0px;
+            top : 0px;
+            width : 80%;
+            /* height : 100%; */
+            background-color: red;
+        }
+
+    </style>
+</head>
+<body>
+    <div> 휴먼교육센터 </div>
+    <div id = "parent"> parent
+        <div id = "me"> child</div>
+    </div>
+</body>
+</html>
