@@ -70,3 +70,15 @@
 - 폴더명: [human-cal-db-ryeom49](https://github.com/ryeomyoung2/human-cal-db-ryeom49)
 - [최종PDF](https://github.com/ryeomyoung2/human-cal-db-ryeom49/blob/main/%EC%A7%80%ED%95%98%EC%B2%A0%20%EA%B5%90%ED%86%B5%20%EB%8F%84%EC%9A%B0%EB%AF%B8%20%EC%B1%97%EB%B4%87%20%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8.pdf)
 - [시연영상](https://www.youtube.com/watch?v=TVT5QuFyewY&t=4s)
+
+ **파이썬 Streamlit 라이브러리를 활용한 IRIS 데이터 머신러닝 대시보드 개발**  
+- **작업툴**: cs code
+- **배포**: Streamlit
+- **사용 언어**: python
+- **사용 라이브러리**: pandas-1.5.2, joblib-1.2.0, streamlit-1.15.1, numpy-1.23.5, matplotlib-3.6.2, seaborn-0.12.1
+- **인원**: 1명  
+- **기간**: 2022.12.03 - 2022.12.04 
+- **내용**
+  - iris 데이터를 분석하고 종을 예측하는 시각화& 머신러닝 대시보드 만들기
+- 폴더명: [streamlit-app-human](https://github.com/ryeomyoung2/streamlit-app-human)
+- [PDF](https://github.com/ryeomyoung2/human-cal-db-ryeom49/blob/main/%EC%A7%80%ED%95%98%EC%B2%A0%20%EA%B5%90%ED%86%B5%20%EB%8F%84%EC%9A%B0%EB%AF%B8%20%EC%B1%97%EB%B4%87%20%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8.pdf) 
