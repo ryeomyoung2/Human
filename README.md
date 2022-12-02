@@ -81,4 +81,4 @@
 - **내용**
   - iris 데이터를 분석하고 종을 예측하는 시각화& 머신러닝 대시보드 만들기
 - 폴더명: [streamlit-app-human](https://github.com/ryeomyoung2/streamlit-app-human)
-- [PDF](https://github.com/ryeomyoung2/human-cal-db-ryeom49/blob/main/%EC%A7%80%ED%95%98%EC%B2%A0%20%EA%B5%90%ED%86%B5%20%EB%8F%84%EC%9A%B0%EB%AF%B8%20%EC%B1%97%EB%B4%87%20%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8.pdf) 
+- [PDF](https://github.com/ryeomyoung2/streamlit-app-human/blob/main/Streamlit_%EB%8C%80%EC%8B%9C%EB%B3%B4%EB%93%9C_221208_%EC%9E%84%EC%97%AC%EB%AA%85.pdf) 
