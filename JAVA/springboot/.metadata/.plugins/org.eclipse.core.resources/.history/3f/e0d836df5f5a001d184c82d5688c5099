@@ -1,0 +1,9 @@
+server.port=8081
+spring.mvc.view.prefix=/WEB-INF/views/
+spring.mvc.view.suffix=.jsp
+
+# oracle set
+spring.datasource.driver-class-name=oracle.jdbc.Oracle
+spring.datasource.url=jdbc:oracle:thin:@localhost:1521/myOracle
+spring.datasource.username=ora_user
+spring.datasource.password=human123

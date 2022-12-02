@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy element &apos;MyController.java&apos; to &apos;Ex14_SimpleBBS/src/main/java/com.study.springboot&apos;&#x0D;&#x0A;- Original project: &apos;Ex13_Jdbc-1&apos;&#x0D;&#x0A;- Destination element: &apos;Ex14_SimpleBBS/src/main/java/com.study.springboot&apos;&#x0D;&#x0A;- Original element: &apos;com.study.springboot.MyController.java&apos;" description="Copy compilation unit" destination="=Ex14_SimpleBBS/src\/main\/java=/gradle_scope=/main=/=/gradle_used_by_scope=/main,test=/&lt;com.study.springboot" element1="/src\/main\/java=/gradle_scope=/main=/=/gradle_used_by_scope=/main,test=/&lt;com.study.springboot{MyController.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1667463373508" units="1" version="1.0"/>
+</session>
