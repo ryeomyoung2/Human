@@ -1,0 +1,232 @@
+---
+title: "11차 빅데이터 분석 II 및 시각화"
+output:
+  html_document:
+    toc: yes
+    df_print: paged
+  html_notebook:
+    toc: yes
+---
+
+## 프로젝트 개요
+- 강의명 : (산대특)_공공데이터 활용 빅데이터 분석 및 시각화 전문가 과정 육성
+- 교과목명 : 빅데이터 분석 II 및 시각화
+- 프로젝트 주제 : tidymodels 라이브러리 및 Sale Price 데이터를 활용한 시각화 및 머신러닝 모델 개발
+- 프로젝트 마감일 : 2022년 12월 19일 
+- 수강생명 : 임여명
+
+## 평가 1. 라이브러리 불러오기 (5점)
+- 주요 라이브러리 및 설치 불러오는 코드를 작성한다. 
+
+```{r}
+# install.packages('tidymodels')
+library(tidymodels)
+```
+
+## 평가 2. 데이터 불러오기 (5점)
+- Sale_Price 데이터를 불러온다. 
+- head() 함수를 활용하여 데이터를 개괄적으로 보여주도록 한다. 
+```{r}
+data("ames")
+head(ames)
+```
+
+## 평가 3. 데이터 시각화 (50점)
+- 시각화 종류에 관계없이 시각화 10개를 작성한다. 
+- 평가기준
+  + 10개 작성 : 50점
+  + 7개 작성 : 35점
+  + 5개 작성 : 25점
+  + 3개 작성 : 15점
+- 참고자료
+  + URL : http://r-statistics.co/Complete-Ggplot2-Tutorial-Part1-With-R-Code.html
+  
+### (1) 산점도그래프
+- ames 데이터의 평방 피트 단위의 차고 크기를 기준으로 판매 가격의 Counts산점도 분석
+- Sale_Price가 0~200000, Garage_Area가 0~600사이  근처에 산점도가 밀집되어 있다. 
+```{r}
+theme_set(theme_bw())  
+ggplot(ames, aes(x = Garage_Area, y = Sale_Price)) +
+geom_count(col="blue", show.legend=F) +
+  labs(y="Sale_Price", 
+       x="Garage_Area", 
+       title="Counts Plot") 
+```
+
+
+
+### (2) 막대그래프
+- ames 데이터의 주거 형태를 기준으로 판매가격을 분석한 막대 그래프
+- House_Style에서 One_Story의 Sales_Price가 가장 높은 것으로 분석됨
+```{r}
+ggplot(ames, aes(x = House_Style , y = Sale_Price)) +
+geom_bar(stat="identity", width = 0.2, fill="green") + 
+      labs(title="Bar Chart" 
+           ) +
+      theme(axis.text.x = element_text(angle=10, vjust=0.5))
+```
+
+
+### (3) 바이올린그래프
+- ames 데이터의 판매가격을 기준으로 중앙에어컨 유무를 분석한  Violin plot 그래프
+- 30만달러 이상의 고가에 거래된 부동산들은 
+전부 Central_Air가 Y인 반면 Central_Air가 N인 부동산은 가격이 30만달러 이하임.
+
+```{r}
+ggplot(ames, aes(Central_Air, Sale_Price)) +
+geom_violin() + 
+labs(title="Violin plot", 
+       caption="Source: mpg",
+       x="Central_Air",
+       y="Sale_Price")
+```
+
+
+### (4) 상자그림그래프
+- ames 데이터의 판매가격을 기준으로 판매유형의 Box plot을 나타낸 그래프
+- Sale_Type에서 WD의 이상점이 넓게 퍼져있는것으로 보아 Sale_Price의 변동이 가장 큰 것을 알 수 있다. 
+```{r}
+theme_set(theme_classic())
+ggplot(ames, aes(Sale_Type, Sale_Price)) +
+geom_boxplot(varwidth=T, fill="red") + 
+    labs(title="Box plot", 
+         caption="Source: mpg",
+         x="Sale_Type",
+         y="Sale_Price")
+```
+
+
+### (5) 히스토그램
+- ames 데이터의 판매 유형을 기준으로 판매횟수와 판매가격을 분석한 히스토그램
+- 가장 많이 판매된 Sale_Type은 20만달러 이하 가격의 WD으로 분석됨
+```{r}
+ggplot(ames, aes(Sale_Price)) + scale_fill_brewer(palette = "Spectral") +
+geom_histogram(aes(fill=Sale_Type), 
+                   bins=10, 
+                   col="white", 
+                   size=.1) +  
+  labs(title="Histogram with Fixed Bins")
+```
+
+
+
+
+## 평가 4. 요약 통계 구하기 (10점)
+- Sale_Price가 500000 이상인 데이터 중에서 Pool_QC에 따른 평균 Sale_Price 값을 구한다. 
+
+```{r}
+ames %>%
+  filter(Sale_Price >= 500000) %>%
+  group_by(Pool_QC) %>%
+  summarize(avg_price = mean(Sale_Price))
+```
+
+
+
+## 평가 5. 머신러닝 모델링 (20점)
+- 주어진 규칙에 따라 머신러닝 코드를 작성한다. 
+  + `8:2` 비율로 훈련데이터셋 및 테스트데이터셋으로 분리한다. (5점)
+  + 모델링은 `RandomForest`와 `glmnet` 알고리즘을 활용한다. (10점)
+    - 만약 1개만 사용 시 5점만 부여
+  + feature Engineering 코드는 주어진 코드이기 때문에 그대로 활용한다. 
+- 옵션: 필요 시, 라이브러리 설치를 한다. 
+  + `install.packages(c('ranger', 'glmnet'))`
+- Sale_Price와 각 모델의 예측 결과표를 만든다. (5점)
+
+### (1) 훈련/테스트 데이터셋 만들기 
+- `8:2` 비율로 훈련데이터셋 및 테스트데이터셋으로 분리한다. (5점)
+```{r}
+set.seed(42)
+
+ames_split = initial_split(ames, strata = 'Sale_Price', prop = 0.8)
+
+ames_train = training(ames_split)
+ames_test = testing(ames_split)
+
+# 다음 코드는 예시다
+normal_recipe = recipe(
+    Sale_Price ~ Longitude + Latitude + Lot_Area + Neighborhood + Year_Sold, 
+    data = ames_train
+  ) %>%
+  step_other(Neighborhood) %>% 
+  step_dummy(all_nominal()) %>%
+  step_center(all_predictors()) %>%
+  step_scale(all_predictors()) %>%
+  step_log(Sale_Price, base = 10) %>% 
+  
+  prep(training = ames_train, retain = TRUE)
+
+norm_test = bake(normal_recipe, new_data = ames_test, all_predictors())
+```
+
+### (2) RandomForest 
+- RandomForest 모형을 작성 후, 확인한다. 
+```{r}
+# Random Forest
+rf_fit = rand_forest(mode = "regression", mtry = .preds(), trees = 2000) %>%
+  set_engine("ranger") %>%
+  fit(
+    Sale_Price ~ ., data = bake(normal_recipe, new_data = NULL)
+  )
+
+rf_fit
+```
+
+### (3) glmnet 
+- glmnet 모형을 작성 후, 확인한다. 
+
+```{r}
+# glmnet
+GLM = linear_reg(penalty = 0.001, mixture = 0.5) %>% 
+  set_engine("glmnet") %>%
+  fit(Sale_Price ~ ., data = bake(normal_recipe, new_data = NULL))
+
+GLM
+```
+
+### (4) 예측 결과표 만들기
+- Sale_Price 컬럼과 예측 모델 결과표를 합한 새로운 데이터 프레임이다. 
+```{r}
+norm_test = bake(normal_recipe, new_data = ames_test, all_predictors())
+
+result = ames_test  %>% 
+  select(Sale_Price) %>% 
+  mutate(Sale_Price = log10(Sale_Price)) %>% 
+  bind_cols(
+    predict(rf_fit, new_data = norm_test) %>%
+      rename(randomForest = .pred)
+    , predict(GLM, new_data = norm_test) %>%
+      rename(glmnet = .pred)
+  )
+
+result
+```
+
+## 평가 6. 두개의 모형 비교 (10점)
+- 회귀모형 평가지표를 활용하여 예측 지표를 작성한다. (5점)
+
+```{r}
+random_result = result %>% 
+  metrics(truth = Sale_Price, estimate = randomForest) %>% 
+  mutate(model = 'randomForest')
+
+GLM_result = result %>% 
+  metrics(truth = Sale_Price, estimate = glmnet) %>% 
+  mutate(model = 'glmnet')
+
+bind_rows(random_result, GLM_result)
+```
+
+- 두개의 그래프를 비교하는 코드를 작성한다. (5점)
+```{r}
+result %>% 
+  gather(model, prediction, -Sale_Price) %>% 
+  ggplot(aes(x = prediction, y = Sale_Price)) + 
+  geom_abline(col = "green", lty = 2) + 
+  geom_point(alpha = .4) + 
+  facet_wrap(~model) + 
+  coord_fixed() + 
+  theme_bw()
+```
+
+.
