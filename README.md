@@ -102,5 +102,5 @@
 - **내용**
   - 둘레길 산책을 좋아하거나 취미로 새로 유입되는 서울 시민들을 위해 서울 둘레길의 정보를 제공하는 웹페이지 제작
 - 폴더명: [SeoulWalkProject](https://github.com/ryeomyoung2/SeoulWalkProject)
-- [최종PDF](https://github.com/ryeomyoung2/human-cal-db-ryeom49/blob/main/%EC%A7%80%ED%95%98%EC%B2%A0%20%EA%B5%90%ED%86%B5%20%EB%8F%84%EC%9A%B0%EB%AF%B8%20%EC%B1%97%EB%B4%87%20%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8.pdf)
+- [최종PDF](https://github.com/ryeomyoung2/SeoulWalkProject/blob/main/SeoulWalk/Seoul%20Walk.pdf)
 - [시연영상](https://www.youtube.com/watch?v=FQA0DWPVtXA)
